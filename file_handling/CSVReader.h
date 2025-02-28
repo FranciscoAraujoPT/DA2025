@@ -10,8 +10,7 @@
 #include <sstream>
 #include <string>
 #include <locale>
-
-#include "Location.h"
+#include "../data_structures/Location.h"
 
 class CSVReader
 {

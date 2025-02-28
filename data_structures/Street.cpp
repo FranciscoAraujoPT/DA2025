@@ -2,7 +2,7 @@
 // Created by macbook on 24/02/2025.
 //
 
-#include "Street.h"
+#include "../data_structures/Street.h"
 
 // Constructor
 Street::Street(Edge<Location> s, double walkTime, double driveTime)

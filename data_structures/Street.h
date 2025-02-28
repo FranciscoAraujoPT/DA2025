@@ -5,7 +5,7 @@
 #ifndef STREET_H
 #define STREET_H
 
-#include "Graph.h"
+#include "../data_structures/Graph.h"
 class Location;
 
 class Street {

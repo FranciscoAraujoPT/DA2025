@@ -1,5 +1,5 @@
-#include "CSVReader.h"
-#include "Street.h"
+#include "../file_handling/CSVReader.h"
+#include "../data_structures/Street.h"
 #include <fstream>
 #include <iostream>
 #include <sstream>

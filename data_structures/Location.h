@@ -7,7 +7,7 @@
 
 #include <string>
 #include <iostream>
-#include "Street.h"
+#include "../data_structures/Street.h"
 
 class Location {
 public:

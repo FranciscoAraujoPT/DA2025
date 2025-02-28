@@ -2,7 +2,7 @@
 // Created by macbook on 21/02/2025.
 //
 
-#include "Location.h"
+#include "../data_structures/Location.h"
 #include <iostream>
 #include <utility>
 
