@@ -4,12 +4,11 @@
 #include <iostream>
 #include <sstream>
 #include <utility>
-
 CSVReader::CSVReader(std::wstring filename, wchar_t delimiter) : filename(std::move(filename)), delimiter(delimiter) {}
 
-void CSVReader::readLocationData(Graph<Location> cityGraph)
+void CSVReader::readLocationData(Graph<Location> *cityGraph)
 {
-    std::wifstream file(filename);  // Use wide file stream
+    std::wifstream file(filename); // Use wide file stream
     if (!file.is_open())
     {
         std::wcerr << L"Error: Unable to open file " << filename << std::endl;
@@ -62,9 +61,9 @@ void CSVReader::readLocationData(Graph<Location> cityGraph)
     file.close();
 }
 
-void CSVReader::readDistanceData(Graph<Location> cityGraph)
+void CSVReader::readDistanceData(Graph<Location> *cityGraph)
 {
-    std::wifstream file(filename);  // Use wide file stream
+    std::wifstream file(filename); // Use wide file stream
     if (!file.is_open())
     {
         std::wcerr << L"Error: Unable to open file " << filename << std::endl;
@@ -92,9 +91,12 @@ void CSVReader::readDistanceData(Graph<Location> cityGraph)
         {
             try
             {
-                if (drivingTime == L"X") {
+                if (drivingTime == L"X")
+                {
                     drivingTimeValue = -1;
-                } else {
+                }
+                else
+                {
                     drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), '"'), drivingTime.end());
                     drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), ','), drivingTime.end());
                     drivingTimeValue = std::stoi(drivingTime);
@@ -118,26 +120,33 @@ void CSVReader::readDistanceData(Graph<Location> cityGraph)
             }
             Vertex<Location> *location1Vertex = nullptr;
             Vertex<Location> *location2Vertex = nullptr;
-            for (Vertex<Location> *l1 : cityGraph->getVertexSet()) {
-                if (l1->getInfo().getCode() == Location1) {
+            for (Vertex<Location> *l1 : cityGraph->getVertexSet())
+            {
+                if (l1->getInfo().getCode() == Location1)
+                {
                     location1Vertex = l1;
                     break;
                 }
             }
-            for (Vertex<Location> *l2 : cityGraph->getVertexSet()) {
-                if (l2->getInfo().getCode() == Location2) {
+            for (Vertex<Location> *l2 : cityGraph->getVertexSet())
+            {
+                if (l2->getInfo().getCode() == Location2)
+                {
                     location2Vertex = l2;
                     break;
                 }
             }
-            if (location1Vertex && location2Vertex) {
+            if (location1Vertex && location2Vertex)
+            {
                 Location loc1 = location1Vertex->getInfo();
                 loc1.addStreet(location1Vertex, location2Vertex, drivingTimeValue, walkingTimeValue);
                 location1Vertex->setInfo(loc1);
                 Location loc2 = location2Vertex->getInfo();
                 loc2.addStreet(location2Vertex, location1Vertex, drivingTimeValue, walkingTimeValue);
                 location2Vertex->setInfo(loc2);
-            } else {
+            }
+            else
+            {
                 std::wcerr << L"One or both the locations were not found in the system." << line << std::endl;
             }
         }

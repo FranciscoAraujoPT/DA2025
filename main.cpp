@@ -5,58 +5,83 @@
 
 #include "file_handling/CSVReader.h" // CSVReader header file
 
-void dijkstra(const Graph<Location>* city, Vertex<Location> *src, Vertex<Location> *dest) {
-    if (src == nullptr || dest == nullptr) {
-        std::cout << "Invalid initial or destination city choice. Please try again." << std::endl;
+
+void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest) {
+    if (!src || !dest) {
+        std::cout << "Invalid source or destination!" << std::endl;
         return;
     }
 
     if (src == dest) {
-        std::cout << "Initial city is the same as the destination!" << std::endl;
+        std::cout << "Source and destination are the same!" << std::endl;
         return;
     }
 
     MutablePriorityQueue<Vertex<Location>> pq;
 
+    // **Initialize distances and paths**
     for (Vertex<Location>* location : city->getVertexSet()) {
         location->setVisited(false);
         location->setPath(nullptr);
-        location->setDist(0);
+        location->setDist(std::numeric_limits<double>::infinity());
     }
+
+    src->setDist(0);
     pq.insert(src);
 
     while (!pq.empty()) {
-        Vertex<Location> *current = pq.extractMin();
+        Vertex<Location>* current = pq.extractMin();
         current->setVisited(true);
-        if (current->getInfo().getId() == dest->getInfo().getId()) {
-            break;
-        }
 
-        double fastestTime = std::numeric_limits<double>::max();
-        std::wcout << current->getInfo().getStreets().size() << std::endl;
-        for (Street *street : current->getInfo().getStreets()) {
-            double newDist = current->getDist() + street->getTime(false);
-            Vertex<Location> *next = street->getStreet()->getDest();
-            if (next->getInfo().isAvailable() && !next->isVisited() && newDist < fastestTime) {
-                fastestTime = newDist;
-                next->setDist(fastestTime);
-                current->setPath(street->getStreet());
+        if (current == dest) break;  // Stop early if destination is reached
+
+        for (Street* street : current->getInfo().getStreets()) {
+            if (street->getTime(false) == -1) {
+                continue;
+            }
+            Vertex<Location>* next = street->getStreet()->getDest();
+
+            if (next->isVisited()) continue;  // Skip visited nodes
+
+            double newDist = current->getDist() + street->getTime(false);  // Edge weight = travel time
+
+            if (newDist < next->getDist()) {
+                next->setDist(newDist);
+                next->setPath(street->getStreet());  // Store the edge, not the vertex
                 pq.insert(next);
             }
         }
     }
-    if (pq.empty()) {
+
+    // **If no path was found**
+    if (dest->getDist() == std::numeric_limits<double>::infinity()) {
         std::cout << "No path found!" << std::endl;
-    } else {
-        std::wcout << L"Best Driving Route: ";
-        double bestDistance = 0;
-        for (Vertex<Location> *location = src; location != dest; location = location->getPath()->getDest()) {
-            bestDistance += location->getDist();
-            std::wcout << location->getInfo().getId() << " -> ";
-        }
-        bestDistance += dest->getDist();
-        std::wcout << dest->getInfo().getId() << std::endl << L"Best Distance Time: " << bestDistance << std::endl;
+        return;
     }
+
+    // **Reconstruct path using edges**
+    std::vector<Vertex<Location>*> path;
+    Vertex<Location>* v = dest;
+
+    while (v != src) {
+        Edge<Location>* edge = v->getPath();
+        if (!edge) {
+            std::cout << "Path reconstruction failed!" << std::endl;
+            return;
+        }
+        path.push_back(v);
+        v = edge->getOrig();  // Move to previous vertex
+    }
+    path.push_back(src);
+    std::reverse(path.begin(), path.end());
+
+    // **Print results**
+    std::wcout << L"Best Driving Route: ";
+    for (size_t i = 0; i < path.size(); ++i) {
+        std::wcout << path[i]->getInfo().getId();
+        if (i < path.size() - 1) std::wcout << L" -> ";
+    }
+    std::wcout << std::endl << L"Best Distance Time: " << dest->getDist() << std::endl;
 }
 
 // Function to print menu options
