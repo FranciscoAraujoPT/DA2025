@@ -1,0 +1,26 @@
+# Ignore CMake build artifacts
+cmake-build-debug/
+cmake-build-release/
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake_install.cmake
+
+# Ignore CLion project files
+.idea/
+*.iml
+
+# Ignore compiled binary files
+*.o
+*.out
+*.exe
+*.bin
+*.a
+*.lib
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.swp
+*~
