@@ -21,8 +21,8 @@ private:
 public:
     explicit CSVReader(std::wstring filename, wchar_t delimiter = ',');
 
-    void readLocationData(Graph<Location> *cityGraph);
-    void readDistanceData(Graph<Location> *cityGraph);
+    void readLocationData(Graph<Location> cityGraph);
+    void readDistanceData(Graph<Location> cityGraph);
 };
 
 #endif // DA_CSVREADER_H

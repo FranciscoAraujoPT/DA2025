@@ -214,11 +214,6 @@ T Vertex<T>::getInfo() const {
 }
 
 template <class T>
-T* Vertex<T>::getInfo2() {
-    return &(this->info);
-}
-
-template <class T>
 int Vertex<T>::getLow() const {
     return this->low;
 }
