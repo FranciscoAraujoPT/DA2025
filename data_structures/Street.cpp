@@ -5,8 +5,8 @@
 #include "../data_structures/Street.h"
 
 // Constructor
-Street::Street(Edge<Location> s, double walkTime, double driveTime)
-    : street(s), walkingTime(walkTime), drivingTime(driveTime) {}
+Street::Street(Edge<Location> s, double driveTime, double walkTime)
+    : street(s), drivingTime(driveTime), walkingTime(walkTime) {}
 
 // Get time based on transport mode
 double Street::getTime(bool isWalking) const {

@@ -6,15 +6,16 @@
 #include "file_handling/CSVReader.h" // CSVReader header file
 
 
-void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest) {
+std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest) {
+    std::vector<Vertex<Location>*> path;
     if (!src || !dest) {
         std::cout << "Invalid source or destination!" << std::endl;
-        return;
+        return path;
     }
 
     if (src == dest) {
         std::cout << "Source and destination are the same!" << std::endl;
-        return;
+        return path;
     }
 
     MutablePriorityQueue<Vertex<Location>> pq;
@@ -24,6 +25,7 @@ void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Locatio
         location->setVisited(false);
         location->setPath(nullptr);
         location->setDist(std::numeric_limits<double>::infinity());
+        location->setQueueIndex(0);
     }
 
     src->setDist(0);
@@ -36,19 +38,26 @@ void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Locatio
         if (current == dest) break;  // Stop early if destination is reached
 
         for (Street* street : current->getInfo().getStreets()) {
+            //std::wcout << street->getStreet()->getOrig()->getInfo().getName() << " " << street->getTime(false) << " " << street->getStreet()->getDest()->getInfo().getName() << std::endl;
             if (street->getTime(false) == -1) {
                 continue;
             }
             Vertex<Location>* next = street->getStreet()->getDest();
 
-            if (next->isVisited()) continue;  // Skip visited nodes
+            if (next->isVisited() || !next->getInfo().isAvailable()) {
+                continue;  // Skip visited nodes
+            }
 
             double newDist = current->getDist() + street->getTime(false);  // Edge weight = travel time
 
             if (newDist < next->getDist()) {
                 next->setDist(newDist);
                 next->setPath(street->getStreet());  // Store the edge, not the vertex
-                pq.insert(next);
+                if (next->getQueueIndex() == 0) {  // If not in the queue, insert it
+                    pq.insert(next);
+                } else {  // If already in the queue, update it
+                    pq.decreaseKey(next);
+                }
             }
         }
     }
@@ -56,18 +65,18 @@ void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Locatio
     // **If no path was found**
     if (dest->getDist() == std::numeric_limits<double>::infinity()) {
         std::cout << "No path found!" << std::endl;
-        return;
+        return path;
     }
 
     // **Reconstruct path using edges**
-    std::vector<Vertex<Location>*> path;
+
     Vertex<Location>* v = dest;
 
     while (v != src) {
         Edge<Location>* edge = v->getPath();
         if (!edge) {
             std::cout << "Path reconstruction failed!" << std::endl;
-            return;
+            return path;
         }
         path.push_back(v);
         v = edge->getOrig();  // Move to previous vertex
@@ -76,12 +85,11 @@ void dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Locatio
     std::reverse(path.begin(), path.end());
 
     // **Print results**
-    std::wcout << L"Best Driving Route: ";
     for (size_t i = 0; i < path.size(); ++i) {
-        std::wcout << path[i]->getInfo().getId();
-        if (i < path.size() - 1) std::wcout << L" -> ";
+
+
     }
-    std::wcout << std::endl << L"Best Distance Time: " << dest->getDist() << std::endl;
+    return path;
 }
 
 // Function to print menu options
@@ -136,7 +144,7 @@ void menu(Graph<Location> *cityGraph)
             printMenuOptions(); // Display the menu again after printing the report
             break;
         case 2: {
-            int startingCity, destCity, counter = 0;
+            int startingCity, destCity;
             std::cout << "Choose the starting city (Id number):" << std::endl;
             std::cin >> startingCity;
             std::cout << "Choose the destination: (Id number):" << std::endl;
@@ -145,19 +153,40 @@ void menu(Graph<Location> *cityGraph)
 
             for (Vertex<Location> *location : cityGraph->getVertexSet()) {
                 if (location->getInfo().getId() == startingCity) {
-                    counter++;
                     startPoint = location;
                 }
                 if (location->getInfo().getId() == destCity) {
-                    counter++;
                     endPoint = location;
                 }
-                if (counter == 2) {
-                    break;
+                Location aux = location->getInfo();
+                aux.setAvailability(true);
+                location->setInfo(aux);
+            }
+            std::wcout << L"Best Driving Route: ";
+            std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
+            for (size_t i = 0; i < path.size(); ++i) {
+                if (path[i] != startPoint && path[i] != endPoint) {
+                    Location aux = path[i]->getInfo();
+                    aux.setAvailability(false);
+                    path[i]->setInfo(aux);
+                }
+                std::wcout << path[i]->getInfo().getName();
+                if (i < path.size() - 1) {
+                    std::wcout << L" -> ";
+                } else {
+                    std::wcout << L"\t Best Distance Time: " << path[i]->getDist() << std::endl;
                 }
             }
-
-            dijkstra(cityGraph, startPoint, endPoint);
+            std::wcout << L"Best Alternative Driving Route: ";
+            path = dijkstra(cityGraph, startPoint, endPoint);
+            for (size_t i = 0; i < path.size(); ++i) {
+                std::wcout << path[i]->getInfo().getName();
+                if (i < path.size() - 1) {
+                    std::wcout << L" -> ";
+                } else {
+                    std::wcout << L"\t Best Alternative Distance Time: " << path[i]->getDist() << std::endl;
+                }
+            }
             break;
         }
 
@@ -179,8 +208,8 @@ int main()
     std::locale loc("pt_PT.UTF-8");
     std::wcout.imbue(loc);
 
-    std::wstring locations_filename = L"./data/Locations.csv";
-    std::wstring distances_filename = L"./data/Distances.csv";
+    std::wstring locations_filename = L"./data/SmallLocations.csv";
+    std::wstring distances_filename = L"./data/SmallDistances.csv";
 
     auto *cityGraph = new Graph<Location>();  // Create a new graph for the city
 

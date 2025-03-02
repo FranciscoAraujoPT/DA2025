@@ -91,14 +91,13 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
         {
             try
             {
+                drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), ','), drivingTime.end());
                 if (drivingTime == L"X")
                 {
                     drivingTimeValue = -1;
                 }
                 else
                 {
-                    drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), '"'), drivingTime.end());
-                    drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), ','), drivingTime.end());
                     drivingTimeValue = std::stoi(drivingTime);
                 }
             }
@@ -109,7 +108,6 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
             }
             try
             {
-                walkingTime.erase(std::remove(walkingTime.begin(), walkingTime.end(), '"'), walkingTime.end());
                 walkingTime.erase(std::remove(walkingTime.begin(), walkingTime.end(), ','), walkingTime.end());
                 walkingTimeValue = std::stoi(walkingTime);
             }

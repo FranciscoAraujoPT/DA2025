@@ -32,6 +32,7 @@ public:
     double getDist() const;
     Edge<T> *getPath() const;
     std::vector<Edge<T> *> getIncoming() const;
+    int getQueueIndex() const;
 
     void setInfo(T info);
     void setVisited(bool visited);
@@ -42,6 +43,7 @@ public:
     int getNum() const;
     void setNum(int value);
 
+    void setQueueIndex(int value);
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
@@ -233,6 +235,11 @@ void Vertex<T>::setNum(int value) {
     this->num = value;
 }
 
+template<class T>
+void Vertex<T>::setQueueIndex(int value) {
+    this->queueIndex = value;
+}
+
 template <class T>
 std::vector<Edge<T>*> Vertex<T>::getAdj() const {
     return this->adj;
@@ -266,6 +273,11 @@ Edge<T> *Vertex<T>::getPath() const {
 template <class T>
 std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
     return this->incoming;
+}
+
+template<class T>
+int Vertex<T>::getQueueIndex() const {
+    return this->queueIndex;
 }
 
 template <class T>

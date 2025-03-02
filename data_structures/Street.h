@@ -11,7 +11,7 @@ class Location;
 class Street {
 public:
     // Constructor
-    Street(Edge<Location> s, double walkTime, double driveTime);
+    Street(Edge<Location> s, double driveTime, double walkTime);
 
     // Get time based on transport mode
     double getTime(bool isWalking) const;
