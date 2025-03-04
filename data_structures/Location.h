@@ -7,7 +7,7 @@
 
 #include <string>
 #include <iostream>
-#include "../data_structures/Street.h"
+#include <utility>
 
 class Location {
 public:
@@ -19,8 +19,6 @@ public:
     int getId() const;
     std::wstring getCode() const;
     bool hasParking() const;
-
-    std::vector<Street*> getStreets();
     bool isAvailable() const;
 
     // Setters
@@ -29,8 +27,6 @@ public:
     void setCode(const std::wstring &newCode);
     void setParking(bool hasParking);
     void setAvailability(bool isAvailable);
-
-    void addStreet(Vertex<Location>* orig, Vertex<Location>* dest, double walkingTime, double drivingTime);
 
     // Overload comparison operators (needed for use in Graph)
     bool operator==(const Location &other) const;
@@ -43,7 +39,6 @@ private:
     int id;            // Unique identifier
     std::wstring code;  // Location code
     bool parking;      // Availability of parking (true/false)
-    std::vector<Street*> streets; // Store edges with walking & driving times
     bool available = true;
 };
 

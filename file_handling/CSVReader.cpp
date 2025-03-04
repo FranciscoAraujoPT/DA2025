@@ -1,9 +1,5 @@
 #include "CSVReader.h"
-#include "../data_structures/Street.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
-#include <utility>
+
 CSVReader::CSVReader(std::wstring filename, wchar_t delimiter) : filename(std::move(filename)), delimiter(delimiter) {}
 
 void CSVReader::readLocationData(Graph<Location> *cityGraph)
@@ -136,12 +132,8 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
             }
             if (location1Vertex && location2Vertex)
             {
-                Location loc1 = location1Vertex->getInfo();
-                loc1.addStreet(location1Vertex, location2Vertex, drivingTimeValue, walkingTimeValue);
-                location1Vertex->setInfo(loc1);
-                Location loc2 = location2Vertex->getInfo();
-                loc2.addStreet(location2Vertex, location1Vertex, drivingTimeValue, walkingTimeValue);
-                location2Vertex->setInfo(loc2);
+                location1Vertex->addEdge(location2Vertex, walkingTimeValue, drivingTimeValue);
+                location2Vertex->addEdge(location1Vertex, walkingTimeValue, drivingTimeValue);
             }
             else
             {

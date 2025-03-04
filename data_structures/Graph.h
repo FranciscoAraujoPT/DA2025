@@ -47,7 +47,7 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
-    Edge<T> * addEdge(Vertex<T> *dest, double w);
+    Edge<T> * addEdge(Vertex *d, double walking, double driving);
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
@@ -76,30 +76,29 @@ protected:
 template <class T>
 class Edge {
 public:
-    Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
+    Edge(Vertex<T> *orig, Vertex<T> *dest, double walking, double driving);
 
     Vertex<T> * getDest() const;
-    double getWeight() const;
-    bool isSelected() const;
     Vertex<T> * getOrig() const;
-    Edge<T> *getReverse() const;
-    double getFlow() const;
 
-    void setSelected(bool selected);
+    double getTime(bool isWalking) const;
+    bool isAvailable() const;
+    void setAvailability(bool isAvailable);
+
+    Edge<T> *getReverse() const;
+
     void setReverse(Edge<T> *reverse);
-    void setFlow(double flow);
 protected:
     Vertex<T> * dest; // destination vertex
-    double weight; // edge weight, can also be used for capacity
 
-    // auxiliary fields
-    bool selected = false;
+    double walkingTime;
+    double drivingTime;
+    bool available = true;
 
     // used for bidirectional edges
     Vertex<T> *orig;
     Edge<T> *reverse = nullptr;
 
-    double flow; // for flow-related problems
 };
 
 /********************** Graph  ****************************/
@@ -124,9 +123,9 @@ public:
      * destination vertices and the edge weight (w).
      * Returns true if successful, and false if the source or destination vertex does not exist.
      */
-    bool addEdge(const T &sourc, const T &dest, double w);
+    bool addEdge(const T &sourc, const T &dest, double walking, double driving);
     bool removeEdge(const T &source, const T &dest);
-    bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
+    bool addBidirectionalEdge(const T &sourc, const T &dest, double walking, double driving);
 
     int getNumVertex() const;
 
@@ -161,8 +160,8 @@ Vertex<T>::Vertex(T in): info(in) {}
  * with a given destination vertex (d) and edge weight (w).
  */
 template <class T>
-Edge<T> * Vertex<T>::addEdge(Vertex<T> *d, double w) {
-    auto newEdge = new Edge<T>(this, d, w);
+Edge<T> * Vertex<T>::addEdge(Vertex<T> *d, double walking, double driving) {
+    auto newEdge = new Edge<T>(this, d, walking, driving);
     adj.push_back(newEdge);
     d->incoming.push_back(newEdge);
     return newEdge;
@@ -329,16 +328,11 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double walking, double driving): orig(orig), dest(dest), walkingTime(walking), drivingTime(driving) {}
 
 template <class T>
 Vertex<T> * Edge<T>::getDest() const {
     return this->dest;
-}
-
-template <class T>
-double Edge<T>::getWeight() const {
-    return this->weight;
 }
 
 template <class T>
@@ -347,33 +341,28 @@ Vertex<T> * Edge<T>::getOrig() const {
 }
 
 template <class T>
+double Edge<T>::getTime(bool isWalking) const {
+    return isWalking ? walkingTime : drivingTime;
+}
+
+template <class T>
+bool Edge<T>::isAvailable() const {
+    return available;
+}
+
+template <class T>
+void Edge<T>::setAvailability(bool isAvailable) {
+    available = isAvailable;
+}
+
+template <class T>
 Edge<T> *Edge<T>::getReverse() const {
     return this->reverse;
 }
 
 template <class T>
-bool Edge<T>::isSelected() const {
-    return this->selected;
-}
-
-template <class T>
-double Edge<T>::getFlow() const {
-    return flow;
-}
-
-template <class T>
-void Edge<T>::setSelected(bool selected) {
-    this->selected = selected;
-}
-
-template <class T>
 void Edge<T>::setReverse(Edge<T> *reverse) {
     this->reverse = reverse;
-}
-
-template <class T>
-void Edge<T>::setFlow(double flow) {
-    this->flow = flow;
 }
 
 /********************** Graph  ****************************/
@@ -449,12 +438,12 @@ bool Graph<T>::removeVertex(const T &in) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double walking, double driving) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
-    v1->addEdge(v2, w);
+    v1->addEdge(v2, walking, driving);
     return true;
 }
 
@@ -473,13 +462,13 @@ bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
 }
 
 template <class T>
-bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double walking, double driving) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
         return false;
-    auto e1 = v1->addEdge(v2, w);
-    auto e2 = v2->addEdge(v1, w);
+    auto e1 = v1->addEdge(v2, walking, driving);
+    auto e2 = v2->addEdge(v1, walking, driving);
     e1->setReverse(e2);
     e2->setReverse(e1);
     return true;

@@ -37,22 +37,21 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
 
         if (current == dest) break;  // Stop early if destination is reached
 
-        for (Street* street : current->getInfo().getStreets()) {
-            //std::wcout << street->getStreet()->getOrig()->getInfo().getName() << " " << street->getTime(false) << " " << street->getStreet()->getDest()->getInfo().getName() << std::endl;
+        for (Edge<Location>* street : current->getAdj()) {
             if (street->getTime(false) == -1 || !street->isAvailable()) {
                 continue;
             }
-            Vertex<Location>* next = street->getStreet()->getDest();
+            Vertex<Location>* next = street->getDest();
 
             if (next->isVisited() || !next->getInfo().isAvailable()) {
                 continue;  // Skip visited nodes
             }
 
-            double newDist = current->getDist() + street->getTime(false);  // Edge weight = travel time
+            double newDist = current->getDist() + street->getTime(false);
 
             if (newDist < next->getDist()) {
                 next->setDist(newDist);
-                next->setPath(street->getStreet());  // Store the edge, not the vertex
+                next->setPath(street);  // Store the edge, not the vertex
                 if (next->getQueueIndex() == 0) {  // If not in the queue, insert it
                     pq.insert(next);
                 } else {  // If already in the queue, update it
@@ -96,7 +95,6 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
     std::string input;
 
     std::cout << "Avoid nodes (Id number):" << std::endl;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, input);
     std::istringstream stream(input); // Convert the line into a stream
 
@@ -146,8 +144,8 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
         for (Vertex<Location> * location : cityGraph->getVertexSet()) {
             if (location->getInfo().getId() == pair.first || location->getInfo().getId() == pair.second) {
                 Location aux = location->getInfo();
-                for (Street* s : aux.getStreets()) {
-                    if (s->getStreet()->getDest()->getInfo().getId() == pair.first || s->getStreet()->getDest()->getInfo().getId() == pair.second) {
+                for (Edge<Location>* s : location->getAdj()) {
+                    if (s->getDest()->getInfo().getId() == pair.first || s->getDest()->getInfo().getId() == pair.second) {
                         s->setAvailability(false);
                         location->setInfo(aux);
                         found++;
@@ -171,8 +169,11 @@ int chooseStartAndEndingCities(Graph<Location>* cityGraph, Vertex<Location> *&st
     int startingCity, destCity;
     std::cout << "Choose the starting city (Id number):" << std::endl;
     std::cin >> startingCity;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::cout << "Choose the destination: (Id number):" << std::endl;
     std::cin >> destCity;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
 
     for (Vertex<Location> *location : cityGraph->getVertexSet()) {
         if (location->getInfo().getId() == startingCity) {
@@ -238,11 +239,11 @@ void menu(Graph<Location> *cityGraph)
         int choice;
         std::cout << "Enter your choice: ";
         std::cin >> choice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         switch (choice)
         {
         case 1: {
             printReport("Locations", cityGraph);
-            printMenuOptions(); // Display the menu again after printing the report
             break;
         }
 
