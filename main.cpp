@@ -39,7 +39,7 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
 
         for (Street* street : current->getInfo().getStreets()) {
             //std::wcout << street->getStreet()->getOrig()->getInfo().getName() << " " << street->getTime(false) << " " << street->getStreet()->getDest()->getInfo().getName() << std::endl;
-            if (street->getTime(false) == -1) {
+            if (street->getTime(false) == -1 || !street->isAvailable()) {
                 continue;
             }
             Vertex<Location>* next = street->getStreet()->getDest();
@@ -92,12 +92,114 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
     return path;
 }
 
+int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
+    std::string input;
+
+    std::cout << "Avoid nodes (Id number):" << std::endl;
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, input);
+    std::istringstream stream(input); // Convert the line into a stream
+
+    int num, found = 0;;
+    std::vector<int> avoidNodes;
+
+    while (stream >> num) {  // Extract numbers from the stream
+        avoidNodes.push_back(num);
+    }
+
+    for (int id : avoidNodes) {
+        for (Vertex<Location> * location : cityGraph->getVertexSet()) {
+            if (location->getInfo().getId() == id) {
+                Location aux = location->getInfo();
+                aux.setAvailability(false);
+                location->setInfo(aux);
+                found++;
+                break;
+            }
+        }
+        if (found != 1) {
+            std::wcerr << L"Error: Didn't find location by id = " << id << "." << std::endl;
+        }
+        found = 0;
+    }
+
+    std::vector<std::pair<int, int>> avoidSegments;
+
+    std::cout << "Avoid Segments (Id number, Id number):" << std::endl;
+    std::getline(std::cin, input);
+    std::istringstream stream2(input);
+    std::string pairStr;
+
+    while (stream2 >> pairStr) {  // Read each "x,y" pair
+        std::replace(pairStr.begin(), pairStr.end(), ',', ' '); // Replace ',' with space
+        std::istringstream pairStream(pairStr);
+        int first, second;
+
+        if (pairStream >> first >> second) {  // Extract two numbers
+            avoidSegments.emplace_back(first, second);
+        }
+    }
+
+    found = 0;
+
+    for (const auto& pair : avoidSegments) {
+        for (Vertex<Location> * location : cityGraph->getVertexSet()) {
+            if (location->getInfo().getId() == pair.first || location->getInfo().getId() == pair.second) {
+                Location aux = location->getInfo();
+                for (Street* s : aux.getStreets()) {
+                    if (s->getStreet()->getDest()->getInfo().getId() == pair.first || s->getStreet()->getDest()->getInfo().getId() == pair.second) {
+                        s->setAvailability(false);
+                        location->setInfo(aux);
+                        found++;
+                        break;
+                    }
+                }
+            }
+            if (found == 2) {
+                break;
+            }
+        }
+        if (found != 2) {
+            std::wcerr << L"Error: Didn't found street with locations with the id = (" << pair.first << "," << pair.second << ")." << std::endl;
+        }
+        found = 0;
+    }
+    return  0;
+}
+
+int chooseStartAndEndingCities(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint) {
+    int startingCity, destCity;
+    std::cout << "Choose the starting city (Id number):" << std::endl;
+    std::cin >> startingCity;
+    std::cout << "Choose the destination: (Id number):" << std::endl;
+    std::cin >> destCity;
+
+    for (Vertex<Location> *location : cityGraph->getVertexSet()) {
+        if (location->getInfo().getId() == startingCity) {
+            startPoint = location;
+        }
+        if (location->getInfo().getId() == destCity) {
+            endPoint = location;
+        }
+        Location aux = location->getInfo();
+        aux.setAvailability(true);
+        location->setInfo(aux);
+    }
+
+    if (startPoint && endPoint) {
+        return 1;
+    }
+
+    return 0;
+}
 // Function to print menu options
 void printMenuOptions()
 {
     std::cout << "Route Planning Analysis Tool Menu:" << std::endl;
     std::cout << "1. Print All Locations" << std::endl;
-    std::cout << "2. Exit" << std::endl;
+    std::cout << "2. Independent Route Planning" << std::endl;
+    std::cout << "3. Restricted Route Planning" << std::endl;
+    std::cout << "4. Exit" << std::endl;
 }
 
 // Function to print reports
@@ -128,74 +230,82 @@ void printReport(const std::string& reportType, const Graph<Location>* cityGraph
 // Function to display the menu and handle user input
 void menu(Graph<Location> *cityGraph)
 {
-    printMenuOptions();
-
     bool menuOpen = true;
 
     while (menuOpen)
     {
+        printMenuOptions();
         int choice;
         std::cout << "Enter your choice: ";
         std::cin >> choice;
         switch (choice)
         {
-        case 1:
+        case 1: {
             printReport("Locations", cityGraph);
             printMenuOptions(); // Display the menu again after printing the report
             break;
-        case 2: {
-            int startingCity, destCity;
-            std::cout << "Choose the starting city (Id number):" << std::endl;
-            std::cin >> startingCity;
-            std::cout << "Choose the destination: (Id number):" << std::endl;
-            std::cin >> destCity;
-            Vertex<Location> *startPoint = nullptr, *endPoint = nullptr;
+        }
 
-            for (Vertex<Location> *location : cityGraph->getVertexSet()) {
-                if (location->getInfo().getId() == startingCity) {
-                    startPoint = location;
+        case 2: {
+            Vertex<Location> *startPoint = nullptr, *endPoint = nullptr;
+            if (chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
+                std::wcout << L"Best Driving Route: ";
+                std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
+                for (size_t i = 0; i < path.size(); ++i) {
+                    if (path[i] != startPoint && path[i] != endPoint) {
+                        Location aux = path[i]->getInfo();
+                        aux.setAvailability(false);
+                        path[i]->setInfo(aux);
+                    }
+                    std::wcout << path[i]->getInfo().getName();
+                    if (i < path.size() - 1) {
+                        std::wcout << L" -> ";
+                    } else {
+                        std::wcout << L"\t Best Time: " << path[i]->getDist() << std::endl;
+                    }
                 }
-                if (location->getInfo().getId() == destCity) {
-                    endPoint = location;
+                std::wcout << L"Best Alternative Driving Route: ";
+                path = dijkstra(cityGraph, startPoint, endPoint);
+                for (size_t i = 0; i < path.size(); ++i) {
+                    std::wcout << path[i]->getInfo().getName();
+                    if (i < path.size() - 1) {
+                        std::wcout << L" -> ";
+                    } else {
+                        std::wcout << L"\t Best Alternative Time: " << path[i]->getDist() << std::endl;
+                    }
                 }
-                Location aux = location->getInfo();
-                aux.setAvailability(true);
-                location->setInfo(aux);
-            }
-            std::wcout << L"Best Driving Route: ";
-            std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
-            for (size_t i = 0; i < path.size(); ++i) {
-                if (path[i] != startPoint && path[i] != endPoint) {
-                    Location aux = path[i]->getInfo();
-                    aux.setAvailability(false);
-                    path[i]->setInfo(aux);
-                }
-                std::wcout << path[i]->getInfo().getName();
-                if (i < path.size() - 1) {
-                    std::wcout << L" -> ";
-                } else {
-                    std::wcout << L"\t Best Distance Time: " << path[i]->getDist() << std::endl;
-                }
-            }
-            std::wcout << L"Best Alternative Driving Route: ";
-            path = dijkstra(cityGraph, startPoint, endPoint);
-            for (size_t i = 0; i < path.size(); ++i) {
-                std::wcout << path[i]->getInfo().getName();
-                if (i < path.size() - 1) {
-                    std::wcout << L" -> ";
-                } else {
-                    std::wcout << L"\t Best Alternative Distance Time: " << path[i]->getDist() << std::endl;
-                }
+            } else {
+                std::wcerr << L"Error: Didn't find one or both cities" << std::endl;
             }
             break;
         }
 
-        case 3:
+        case 3: {
+            Vertex<Location> *startPoint, *endPoint;
+            if (chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
+                chooseNodesAndSegmentsToAvoid(cityGraph);
+                std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
+                for (size_t i = 0; i < path.size(); ++i) {
+                    std::wcout << path[i]->getInfo().getName();
+                    if (i < path.size() - 1) {
+                        std::wcout << L" -> ";
+                    } else {
+                        std::wcout << L"\t Best Time: " << path[i]->getDist() << std::endl;
+                    }
+                }
+            } else {
+                std::wcerr << L"Error: Didn't find one or both cities" << std::endl;
+            }
+            break;
+        }
+
+        case 4:
             std::cout << "Exiting..." << std::endl;
             menuOpen = false; // Exit the menu loop
             break;
+
         default:
-            std::cout << "Invalid choice. Please try again." << std::endl;
+            std::wcerr << "Invalid choice. Please try again." << std::endl;
             break;
         }
     }
