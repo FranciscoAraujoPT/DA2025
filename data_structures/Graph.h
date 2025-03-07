@@ -31,6 +31,7 @@ public:
     unsigned int getIndegree() const;
     double getDist() const;
     Edge<T> *getPath() const;
+    std::vector<Edge<T>> *getPaths() const; // Added to accommodate multiple paths
     std::vector<Edge<T> *> getIncoming() const;
     int getQueueIndex() const;
 
@@ -47,7 +48,9 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
+    void setPaths(Edge<T> *path); // Added to accommodate multiple paths
     Edge<T> * addEdge(Vertex *d, double walking, double driving);
+    void clearPaths();
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
@@ -63,6 +66,7 @@ protected:
     unsigned int indegree; // used by topsort
     double dist = 0;
     Edge<T> *path = nullptr;
+    std::vector<Edge<T>*> paths; // Added to accommodate multiple paths
 
     std::vector<Edge<T> *> incoming; // incoming edges
 
@@ -82,6 +86,7 @@ public:
     Vertex<T> * getOrig() const;
 
     double getTime(bool isWalking) const;
+    int getCurrentWalkingTime() const; // Added for Env Friendly
     bool isAvailable() const;
     void setAvailability(bool isAvailable);
 
@@ -93,6 +98,7 @@ protected:
 
     double walkingTime;
     double drivingTime;
+    int currentWalkingTime; // Added for Env Friendly
     bool available = true;
 
     // used for bidirectional edges
@@ -269,6 +275,11 @@ Edge<T> *Vertex<T>::getPath() const {
     return this->path;
 }
 
+template <class T> // Added to accommodate multiple paths
+std::vector<Edge<T>> *Vertex<T>::getPaths() const {
+    return this->paths;
+}
+
 template <class T>
 std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
     return this->incoming;
@@ -309,6 +320,16 @@ void Vertex<T>::setPath(Edge<T> *path) {
     this->path = path;
 }
 
+template <class T> // Added to accommodate multiple paths
+void Vertex<T>::setPaths(Edge<T> *path) {
+    paths.push_back(path);
+}
+
+template <class T> // Added to accommodate multiple paths
+void Vertex<T>::clearPaths() {
+    paths.clear();
+}
+
 template <class T>
 void Vertex<T>::deleteEdge(Edge<T> *edge) {
     Vertex<T> *dest = edge->getDest();
@@ -343,6 +364,11 @@ Vertex<T> * Edge<T>::getOrig() const {
 template <class T>
 double Edge<T>::getTime(bool isWalking) const {
     return isWalking ? walkingTime : drivingTime;
+}
+
+template <class T> // Added for Env Friendly
+int Edge<T>::getCurrentWalkingTime() const {
+    return this->currentWalkingTime;
 }
 
 template <class T>
