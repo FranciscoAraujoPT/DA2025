@@ -15,6 +15,7 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
 
     if (src == dest) {
         std::cout << "Source and destination are the same!" << std::endl;
+        path.push_back(src);
         return path;
     }
 
@@ -116,7 +117,7 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
             }
         }
         if (found != 1) {
-            std::wcerr << "Error: Didn't find location by id = " << id << "." << std::endl;
+            std::cerr << "Error: Didn't find location by id = " << id << "." << std::endl;
         }
         found = 0;
     }
@@ -158,7 +159,7 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
             }
         }
         if (found != 2) {
-            std::wcerr << "Error: Didn't found street with locations with the id = (" << pair.first << "," << pair.second << ")." << std::endl;
+            std::cerr << "Error: Didn't found street with locations with the id = (" << pair.first << "," << pair.second << ")." << std::endl;
         }
         found = 0;
     }
@@ -193,6 +194,38 @@ int chooseStartAndEndingCities(Graph<Location>* cityGraph, Vertex<Location> *&st
 
     return 0;
 }
+
+std::vector<Vertex<Location>*> chooseMiddlePoint(Graph<Location>* cityGraph) {
+    std::string input;
+    std::cout << "Choose the locations to make stops, in order, during path (Id number): " << std::endl;
+    std::getline(std::cin, input);
+    std::istringstream stream(input); // Convert the line into a stream
+
+
+    int num, found = 0;;
+    std::vector<int> stopNodesId;
+
+    while (stream >> num) {  // Extract numbers from the stream
+        stopNodesId.push_back(num);
+    }
+    std::vector<Vertex<Location>*> stopLocations;
+    for (int id : stopNodesId) {
+        for (Vertex<Location> * location : cityGraph->getVertexSet()) {
+            if (location->getInfo().getId() == id) {
+                stopLocations.emplace_back(location);
+                found = 1;
+                break;
+            }
+        }
+        if (found != 1) {
+            std::cerr << "Error: Didn't find location by id = " << id << "." << std::endl;
+        }
+        found = 0;
+    }
+
+    return stopLocations;
+}
+
 // Function to print menu options
 void printMenuOptions()
 {
@@ -259,6 +292,7 @@ void menu(Graph<Location> *cityGraph)
                         path[i]->setInfo(aux);
                     }
                     std::cout << path[i]->getInfo().getName();
+                    std::cout << "(" << path[i]->getInfo().getId() << ")";
                     if (i < path.size() - 1) {
                         std::cout << " -> ";
                     } else {
@@ -269,6 +303,7 @@ void menu(Graph<Location> *cityGraph)
                 path = dijkstra(cityGraph, startPoint, endPoint);
                 for (size_t i = 0; i < path.size(); ++i) {
                     std::cout << path[i]->getInfo().getName();
+                    std::cout << "(" << path[i]->getInfo().getId() << ")";
                     if (i < path.size() - 1) {
                         std::cout << " -> ";
                     } else {
@@ -276,7 +311,7 @@ void menu(Graph<Location> *cityGraph)
                     }
                 }
             } else {
-                std::wcerr << "Error: Didn't find one or both cities" << std::endl;
+                std::cerr << "Error: Didn't find one or both cities" << std::endl;
             }
             break;
         }
@@ -285,17 +320,51 @@ void menu(Graph<Location> *cityGraph)
             Vertex<Location> *startPoint, *endPoint;
             if (chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
                 chooseNodesAndSegmentsToAvoid(cityGraph);
-                std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
-                for (size_t i = 0; i < path.size(); ++i) {
-                    std::cout << path[i]->getInfo().getName();
-                    if (i < path.size() - 1) {
-                        std::cout << " -> ";
+                std::vector<Vertex<Location>*> stopLocations = chooseMiddlePoint(cityGraph);
+                Vertex<Location>* start = startPoint;
+                std::vector<Vertex<Location>*> totalPath;
+                Vertex<Location>* end = endPoint;
+                double bestDistance = 0;
+                bool success = true;
+                for (Vertex<Location>* location : stopLocations) {
+                    end = location;
+                    std::vector<Vertex<Location>*> path = dijkstra(cityGraph, start, end);
+                    if (path.size() > 0) {
+                        bestDistance = bestDistance + path[path.size() - 1]->getDist();
+                        totalPath.insert(totalPath.end(), path.begin(), path.end()-1);
                     } else {
-                        std::cout << "\t Best Time: " << path[i]->getDist() << std::endl;
+                        success = false;
+                        break;
                     }
+                    start = location;
                 }
+                if (success) {
+                    std::vector<Vertex<Location>*> path = dijkstra(cityGraph, start, endPoint);
+                     if (path.size() > 0) {
+                         bestDistance = bestDistance + path[path.size() - 1]->getDist();
+                         totalPath.insert(totalPath.end(), path.begin(), path.end());
+                         for (size_t i = 0; i < totalPath.size(); ++i) {
+                             std::cout << totalPath[i]->getInfo().getName();
+                             std::cout << "(" << totalPath[i]->getInfo().getId() << ")";
+
+                             if (i < totalPath.size() - 1) {
+                                 std::cout << " -> ";
+                             } else {
+                                 std::cout << "\t Best Time: " << bestDistance << std::endl;
+                             }
+                         }
+                    } else {
+                        std::cerr << "Error: Didn't find a path from " << start->getInfo().getName() << " to " << endPoint->getInfo().getName() << "." << std::endl;
+
+                    }
+                } else {
+                    std::cerr << "Error: Didn't find a path from " << start->getInfo().getName() << " to " << end->getInfo().getName() << "." << std::endl;
+                }
+
+
+
             } else {
-                std::wcerr << "Error: Didn't find one or both cities" << std::endl;
+                std::cerr << "Error: Didn't find one or both cities" << std::endl;
             }
             break;
         }
@@ -306,7 +375,7 @@ void menu(Graph<Location> *cityGraph)
             break;
 
         default:
-            std::wcerr << "Invalid choice. Please try again." << std::endl;
+            std::cerr << "Invalid choice. Please try again." << std::endl;
             break;
         }
     }
