@@ -1,33 +1,32 @@
 #include "CSVReader.h"
 
-CSVReader::CSVReader(std::wstring filename, wchar_t delimiter) : filename(std::move(filename)), delimiter(delimiter) {}
+CSVReader::CSVReader(std::string filename, char delimiter) : filename(std::move(filename)), delimiter(delimiter) {}
 
 void CSVReader::readLocationData(Graph<Location> *cityGraph)
 {
-    std::wifstream file(filename); // Use wide file stream
+    std::ifstream file(filename); // Use wide file stream
     if (!file.is_open())
     {
-        std::wcerr << L"Error: Unable to open file " << filename << std::endl;
+        std::cerr << "Error: Unable to open file " << filename << std::endl;
         return;
     }
 
-    file.imbue(std::locale("pt_PT.UTF-8"));
     // Skip the header line
-    std::wstring header;
+    std::string header;
     std::getline(file, header);
 
     // Read CSV data
-    std::wstring line;
+    std::string line;
     while (std::getline(file, line))
     {
-        std::wstringstream ss(line); // Use wide stringstream
-        std::wstring locationName, locationId, code, parking;
+        std::istringstream ss(line); // Use wide stringstream
+        std::string locationName, locationId, code, parking;
         int id, parkingValue;
         // Assuming the last two columns are empty and ignored
         if (std::getline(ss, locationName, delimiter) &&
             std::getline(ss, locationId, delimiter) &&
             std::getline(ss, code, delimiter) &&
-            std::getline(ss, parking, L'\r'))
+            std::getline(ss, parking, '\r'))
         {
             // Convert the ID from string to integer
             try
@@ -37,7 +36,7 @@ void CSVReader::readLocationData(Graph<Location> *cityGraph)
             }
             catch ([[maybe_unused]] const std::invalid_argument &e)
             {
-                std::wcerr << L"Invalid ID format: " << line << std::endl;
+                std::cerr << "Invalid ID format: " << line << std::endl;
                 continue; // Skip this line if ID is not a valid integer
             }
             try
@@ -47,7 +46,7 @@ void CSVReader::readLocationData(Graph<Location> *cityGraph)
             }
             catch ([[maybe_unused]] const std::invalid_argument &e)
             {
-                std::wcerr << L"Invalid parking format in Locations: " << line << std::endl;
+                std::cerr << "Invalid parking format in Locations: " << line << std::endl;
                 continue; // Skip this line if max delivery is not a valid integer
             }
             cityGraph->addVertex(Location(locationName, id, code, parkingValue));
@@ -59,36 +58,35 @@ void CSVReader::readLocationData(Graph<Location> *cityGraph)
 
 void CSVReader::readDistanceData(Graph<Location> *cityGraph)
 {
-    std::wifstream file(filename); // Use wide file stream
+    std::ifstream file(filename); // Use wide file stream
     if (!file.is_open())
     {
-        std::wcerr << L"Error: Unable to open file " << filename << std::endl;
+        std::cerr << "Error: Unable to open file " << filename << std::endl;
         return;
     }
 
-    file.imbue(std::locale("pt_PT.UTF-8"));
     // Skip the header line
-    std::wstring header;
+    std::string header;
     std::getline(file, header);
 
     // Read CSV data
-    std::wstring line;
+    std::string line;
     while (std::getline(file, line))
     {
-        std::wstringstream ss(line); // Use wide stringstream
-        std::wstring Location1, Location2, drivingTime, walkingTime;
+        std::stringstream ss(line); // Use wide stringstream
+        std::string Location1, Location2, drivingTime, walkingTime;
         int drivingTimeValue, walkingTimeValue;
 
         // Assuming the last column is not needed
         if (std::getline(ss, Location1, delimiter) &&
             std::getline(ss, Location2, delimiter) &&
             std::getline(ss, drivingTime, delimiter) &&
-            std::getline(ss, walkingTime, L'\r'))
+            std::getline(ss, walkingTime, '\r'))
         {
             try
             {
                 drivingTime.erase(std::remove(drivingTime.begin(), drivingTime.end(), ','), drivingTime.end());
-                if (drivingTime == L"X")
+                if (drivingTime == "X")
                 {
                     drivingTimeValue = -1;
                 }
@@ -99,7 +97,7 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
             }
             catch ([[maybe_unused]] const std::invalid_argument &e)
             {
-                std::wcerr << L"Invalid driving time in distances: " << line << std::endl;
+                std::cerr << "Invalid driving time in distances: " << line << std::endl;
                 continue; // Skip this line if ID is not a valid integer
             }
             try
@@ -109,7 +107,7 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
             }
             catch ([[maybe_unused]] const std::invalid_argument &e)
             {
-                std::wcerr << L"Invalid walking time in distances: " << line << std::endl;
+                std::cerr << "Invalid walking time in distances: " << line << std::endl;
                 continue; // Skip this line if demand is not a valid integer
             }
             Vertex<Location> *location1Vertex = nullptr;
@@ -137,7 +135,7 @@ void CSVReader::readDistanceData(Graph<Location> *cityGraph)
             }
             else
             {
-                std::wcerr << L"One or both the locations were not found in the system." << line << std::endl;
+                std::cerr << "One or both the locations were not found in the system." << line << std::endl;
             }
         }
     }

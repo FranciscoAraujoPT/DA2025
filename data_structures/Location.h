@@ -12,19 +12,19 @@
 class Location {
 public:
     // Constructor
-    Location(std::wstring name, int id, std::wstring code, bool parking);
+    Location(std::string name, int id, std::string code, bool parking);
 
     // Getters
-    std::wstring getName() const;
+    std::string getName() const;
     int getId() const;
-    std::wstring getCode() const;
+    std::string getCode() const;
     bool hasParking() const;
     bool isAvailable() const;
 
     // Setters
-    void setName(const std::wstring &newName);
+    void setName(const std::string &newName);
     void setId(int newId);
-    void setCode(const std::wstring &newCode);
+    void setCode(const std::string &newCode);
     void setParking(bool hasParking);
     void setAvailability(bool isAvailable);
 
@@ -35,9 +35,9 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Location &loc);
 
 private:
-    std::wstring name;  // Location name
+    std::string name;  // Location name
     int id;            // Unique identifier
-    std::wstring code;  // Location code
+    std::string code;  // Location code
     bool parking;      // Availability of parking (true/false)
     bool available = true;
 };

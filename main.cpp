@@ -116,7 +116,7 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
             }
         }
         if (found != 1) {
-            std::wcerr << L"Error: Didn't find location by id = " << id << "." << std::endl;
+            std::wcerr << "Error: Didn't find location by id = " << id << "." << std::endl;
         }
         found = 0;
     }
@@ -158,7 +158,7 @@ int chooseNodesAndSegmentsToAvoid(Graph<Location>* cityGraph) {
             }
         }
         if (found != 2) {
-            std::wcerr << L"Error: Didn't found street with locations with the id = (" << pair.first << "," << pair.second << ")." << std::endl;
+            std::wcerr << "Error: Didn't found street with locations with the id = (" << pair.first << "," << pair.second << ")." << std::endl;
         }
         found = 0;
     }
@@ -209,17 +209,17 @@ void printReport(const std::string& reportType, const Graph<Location>* cityGraph
 
     if (reportType == "Locations") {
         // Ensure sufficient width for each column
-        std::wcout << std::setw(15) << std::left << L"Location ID"
-                   << std::setw(40) << std::left << L"Location Name"
-                   << std::setw(20) << std::left << L"Code"
-                   << std::setw(15) << std::left << L"Parking" << std::endl;
+        std::cout << std::setw(15) << std::left << "Location ID"
+                   << std::setw(40) << std::left << "Location Name"
+                   << std::setw(20) << std::left << "Code"
+                   << std::setw(15) << std::left << "Parking" << std::endl;
 
         for (Vertex<Location> * location : cityGraph->getVertexSet()) {
             // Print out each field ensuring proper width for wide characters
-            std::wcout << std::setw(15) << std::left << location->getInfo().getId()
+            std::cout << std::setw(15) << std::left << location->getInfo().getId()
                        << std::setw(40) << std::left << location->getInfo().getName()
                        << std::setw(20) << std::left << location->getInfo().getCode()
-                       << std::setw(15) << std::left << (location->getInfo().hasParking() ? L"Yes" : L"No") << std::endl;
+                       << std::setw(15) << std::left << (location->getInfo().hasParking() ? "Yes" : "No") << std::endl;
         }
     }
     else {
@@ -250,7 +250,7 @@ void menu(Graph<Location> *cityGraph)
         case 2: {
             Vertex<Location> *startPoint = nullptr, *endPoint = nullptr;
             if (chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
-                std::wcout << L"Best Driving Route: ";
+                std::cout << "Best Driving Route: ";
                 std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
                 for (size_t i = 0; i < path.size(); ++i) {
                     if (path[i] != startPoint && path[i] != endPoint) {
@@ -258,25 +258,25 @@ void menu(Graph<Location> *cityGraph)
                         aux.setAvailability(false);
                         path[i]->setInfo(aux);
                     }
-                    std::wcout << path[i]->getInfo().getName();
+                    std::cout << path[i]->getInfo().getName();
                     if (i < path.size() - 1) {
-                        std::wcout << L" -> ";
+                        std::cout << " -> ";
                     } else {
-                        std::wcout << L"\t Best Time: " << path[i]->getDist() << std::endl;
+                        std::cout << "\t Best Time: " << path[i]->getDist() << std::endl;
                     }
                 }
-                std::wcout << L"Best Alternative Driving Route: ";
+                std::cout << "Best Alternative Driving Route: ";
                 path = dijkstra(cityGraph, startPoint, endPoint);
                 for (size_t i = 0; i < path.size(); ++i) {
-                    std::wcout << path[i]->getInfo().getName();
+                    std::cout << path[i]->getInfo().getName();
                     if (i < path.size() - 1) {
-                        std::wcout << L" -> ";
+                        std::cout << " -> ";
                     } else {
-                        std::wcout << L"\t Best Alternative Time: " << path[i]->getDist() << std::endl;
+                        std::cout << "\t Best Alternative Time: " << path[i]->getDist() << std::endl;
                     }
                 }
             } else {
-                std::wcerr << L"Error: Didn't find one or both cities" << std::endl;
+                std::wcerr << "Error: Didn't find one or both cities" << std::endl;
             }
             break;
         }
@@ -287,15 +287,15 @@ void menu(Graph<Location> *cityGraph)
                 chooseNodesAndSegmentsToAvoid(cityGraph);
                 std::vector<Vertex<Location>*> path = dijkstra(cityGraph, startPoint, endPoint);
                 for (size_t i = 0; i < path.size(); ++i) {
-                    std::wcout << path[i]->getInfo().getName();
+                    std::cout << path[i]->getInfo().getName();
                     if (i < path.size() - 1) {
-                        std::wcout << L" -> ";
+                        std::cout << " -> ";
                     } else {
-                        std::wcout << L"\t Best Time: " << path[i]->getDist() << std::endl;
+                        std::cout << "\t Best Time: " << path[i]->getDist() << std::endl;
                     }
                 }
             } else {
-                std::wcerr << L"Error: Didn't find one or both cities" << std::endl;
+                std::wcerr << "Error: Didn't find one or both cities" << std::endl;
             }
             break;
         }
@@ -315,12 +315,10 @@ void menu(Graph<Location> *cityGraph)
 // Main function, entry point of the program
 int main()
 {
-    setlocale(LC_ALL, "pt_PT.UTF-8");
-    std::locale loc("pt_PT.UTF-8");
-    std::wcout.imbue(loc);
+    setlocale(LC_ALL, "");
 
-    std::wstring locations_filename = L"./data/SmallLocations.csv";
-    std::wstring distances_filename = L"./data/SmallDistances.csv";
+    std::string locations_filename = "./data/SmallLocations.csv";
+    std::string distances_filename = "./data/SmallDistances.csv";
 
     auto *cityGraph = new Graph<Location>();  // Create a new graph for the city
 

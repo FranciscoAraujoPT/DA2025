@@ -18,11 +18,11 @@
 class CSVReader
 {
 private:
-    std::wstring filename;
-    wchar_t delimiter;
+    std::string filename;
+    char delimiter;
 
 public:
-    explicit CSVReader(std::wstring filename, wchar_t delimiter = ',');
+    explicit CSVReader(std::string filename, char delimiter = ',');
 
     void readLocationData(Graph<Location> *cityGraph);
     void readDistanceData(Graph<Location> *cityGraph);

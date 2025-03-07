@@ -6,20 +6,20 @@
 
 
 // Constructor implementation
-Location::Location(std::wstring name, int id, std::wstring code, bool parking)
+Location::Location(std::string name, int id, std::string code, bool parking)
     : name(std::move(name)), id(id), code(std::move(code)), parking(parking) {}
 
 // Getters
-std::wstring Location::getName() const { return name; }
+std::string Location::getName() const { return name; }
 int Location::getId() const { return id; }
-std::wstring Location::getCode() const { return code; }
+std::string Location::getCode() const { return code; }
 bool Location::hasParking() const { return parking; }
 bool Location::isAvailable() const { return available; }
 
 // Setters
-void Location::setName(const std::wstring &newName) { name = newName; }
+void Location::setName(const std::string &newName) { name = newName; }
 void Location::setId(int newId) { id = newId; }
-void Location::setCode(const std::wstring &newCode) { code = newCode; }
+void Location::setCode(const std::string &newCode) { code = newCode; }
 void Location::setParking(bool hasParking) { parking = hasParking; }
 void Location::setAvailability(bool isAvailable) { available = isAvailable; }
 
