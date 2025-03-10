@@ -86,7 +86,6 @@ public:
     Vertex<T> * getOrig() const;
 
     double getTime(bool isWalking) const;
-    int getCurrentWalkingTime() const; // Added for Env Friendly
     bool isAvailable() const;
     void setAvailability(bool isAvailable);
 
@@ -98,7 +97,6 @@ protected:
 
     double walkingTime;
     double drivingTime;
-    int currentWalkingTime; // Added for Env Friendly
     bool available = true;
 
     // used for bidirectional edges
@@ -364,11 +362,6 @@ Vertex<T> * Edge<T>::getOrig() const {
 template <class T>
 double Edge<T>::getTime(bool isWalking) const {
     return isWalking ? walkingTime : drivingTime;
-}
-
-template <class T> // Added for Env Friendly
-int Edge<T>::getCurrentWalkingTime() const {
-    return this->currentWalkingTime;
 }
 
 template <class T>

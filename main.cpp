@@ -1,8 +1,9 @@
-#include <iostream>    // Input/output stream library
-#include <iomanip>     // Input/output manipulation library
-#include <map>         // Map library
-#include <vector>      // Vector container library
-#include <string>      // String library
+#include <iostream>      // Input/output stream library
+#include <iomanip>       // Input/output manipulation library
+#include <vector>        // Vector container library
+#include <string>        // String library
+#include <stack>         // Stack library
+#include <unordered_map> // Unordered map library
 
 #include "file_handling/CSVReader.h" // CSVReader header file
 
@@ -13,11 +14,6 @@ int checkStartAndEndingCitiesAdjacency(std::vector<Edge<Location> *> streets, in
             flag = 1;
     }
     return flag;
-}
-
-bool compareMap(const std::pair<Vertex<Location>*,int> &a, const std::pair<Vertex<Location>*,int> &b)
-{
-    return a.second < b.second;
 }
 
 int chooseStartAndEndingCitiesEnvFriendly(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint, int &maxWalkingTime) {
@@ -85,139 +81,193 @@ More requirements:
       be met, i.e., walking time exceeds predefined maximum limit or absence of parking, or both.
 */
 
-std::vector<std::vector<Vertex<Location>*>> walkingDijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime) {
+std::unordered_map<Vertex<Location>*, double> computeDrivingDistances(const Graph<Location>* city, Vertex<Location>* src, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& drivingParentMap) {
+    std::unordered_map<Vertex<Location>*, double> drivingDistances;
+    MutablePriorityQueue<Vertex<Location>> pq;
+
+    for (Vertex<Location>* location : city->getVertexSet()) {
+        location->setVisited(false);
+        location->setDist(std::numeric_limits<double>::infinity());
+        location->setQueueIndex(0);
+    }
+
+    src->setDist(0);
+    pq.insert(src);
+
+    while (!pq.empty()) {
+        Vertex<Location>* current = pq.extractMin();
+        current->setVisited(true);
+
+        for (Edge<Location>* street : current->getAdj()) {
+
+            if (street->getTime(false) == -1 || !street->isAvailable()) continue;
+
+            Vertex<Location>* next = street->getDest();
+
+            if (next->isVisited() || !next->getInfo().isAvailable()) continue;
+
+            double newDist = current->getDist() + street->getTime(false);
+
+            if (newDist < next->getDist()) {
+                next->setDist(newDist);
+                drivingParentMap[next].clear();
+                drivingParentMap[next].push_back(current);
+                if (next->getQueueIndex() == 0) {
+                    pq.insert(next);
+                }
+                else {
+                    pq.decreaseKey(next);
+                }
+            }
+            else if (newDist == next->getDist()) {
+                drivingParentMap[next].push_back(current);
+            }
+        }
+    }
+
+    // Store only parking spots
+    for (Vertex<Location>* location : city->getVertexSet()) {
+        if (location->getInfo().hasParking()) {
+            drivingDistances[location] = location->getDist();
+        }
+    }
+
+    return drivingDistances;
+}
+
+std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Graph<Location>* city, Vertex<Location>* dest, int maxWalkingTime, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> &walkingParentMap) {
+
+    std::unordered_map<Vertex<Location>*, double> walkingDistances;
+    MutablePriorityQueue<Vertex<Location>> pq;
+
+    for (Vertex<Location>* location : city->getVertexSet()) {
+        location->setVisited(false);
+        location->setDist(std::numeric_limits<double>::infinity());
+        location->setQueueIndex(0);
+    }
+
+    dest->setDist(0);
+    pq.insert(dest);
+
+    while (!pq.empty()) {
+        Vertex<Location>* current = pq.extractMin();
+        current->setVisited(true);
+
+        for (Edge<Location>* street : current->getAdj()) {
+            if (!street->isAvailable()) continue;
+
+            Vertex<Location>* next = street->getDest();
+
+            if (next->isVisited() || !next->getInfo().isAvailable()) continue;
+
+            double newDist = current->getDist() + street->getTime(true);
+
+            if (newDist > maxWalkingTime) continue;
+
+            if (newDist < next->getDist()) {
+                next->setDist(newDist);
+                walkingDistances[next] = newDist;
+                walkingParentMap[current].clear(); //Storing parents in reverse order, since we are starting at dest
+                walkingParentMap[current].push_back(next);
+                if (next->getQueueIndex() == 0) {
+                    pq.insert(next);
+                }
+                else {
+                    pq.decreaseKey(next);
+                }
+            }
+            else if (newDist == next->getDist()) {
+                walkingParentMap[current].push_back(next);
+            }
+        }
+    }
+
+    return walkingDistances;
+}
+
+Vertex<Location>* findBestParkingSpot(std::unordered_map<Vertex<Location>*, double> &drivingDistances, std::unordered_map<Vertex<Location>*, double> &walkingDistances, int maxWalkingTime) {
+
+    Vertex<Location>* bestParkingSpot = nullptr;
+    double bestTotalTime = std::numeric_limits<double>::infinity();
+    double longestWalkingTime = 0;
+
+    for (auto& [parkingSpot, drivingTime] : drivingDistances) {
+        if (!walkingDistances.contains(parkingSpot)) continue;
+
+        double walkingTime = walkingDistances[parkingSpot];
+        if (walkingTime > maxWalkingTime) continue;
+
+        double totalTime = drivingTime + walkingTime;
+
+        std::cout << parkingSpot->getInfo().getId() << " : " << totalTime << std::endl;
+
+        if (totalTime < bestTotalTime || (totalTime == bestTotalTime && walkingTime > longestWalkingTime)) {
+            bestTotalTime = totalTime;
+            longestWalkingTime = walkingTime;
+            bestParkingSpot = parkingSpot;
+        }
+    }
+
+    return bestParkingSpot;
+}
+
+std::vector<Vertex<Location>*> reconstructPath(Vertex<Location>* start, Vertex<Location>* end, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& parentMap) {
+
+    // IMPLEMENT BFS TO FIND EXPLORE THE CORRECT PATH
+}
+
+void printPath(const std::vector<Vertex<Location>*>& path, const std::string& label) {
+    std::cout << label << ": ";
+    for (auto node : path) {
+        std::cout << node->getInfo().getId() << " -> ";
+    }
+    std::cout << "END" << std::endl;
+}
+
+void findBestRouteDrivingWalking(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime) {
     std::vector<std::vector<Vertex<Location>*>> paths;
-    std::vector<Vertex<Location>*> drivingRoute;
-    std::vector<Vertex<Location>*> walkingRoute;
-    std::vector<Vertex<Location>*> stopRoute;
 
     if (!src || !dest) {
         std::cout << "Invalid source or destination!" << std::endl;
-        return paths;
+        return;
     }
-
     if (src == dest) {
         std::cout << "Source and destination are the same!" << std::endl;
-        return paths;
+        return;
     }
 
     bool isDrivable = false;
-
     for (auto streets : src->getAdj()) {
         if (streets->getTime(false) != -1 && streets->isAvailable()) {
             isDrivable = true;
             break;
         }
     }
-
     if (!isDrivable) {
         std::cout << "There are no reachable cities through driving from the start node!" << std::endl;
-        return paths;
+        return;
     }
 
+    std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> drivingParentMap;
+    std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> walkingParentMap;
     MutablePriorityQueue<Vertex<Location>> pq;
-    std::map<Vertex<Location>*, int> parkingMap;
 
-    for (Vertex<Location>* location : city->getVertexSet()) {
-        location->setVisited(false);
-        location->setDist(std::numeric_limits<double>::infinity());
-        location->setQueueIndex(0);
-        if (location->getInfo().hasParking()) { // Saving all parking city candidates
-            parkingMap.insert({location,0});
-        }
+    auto drivingDistances = computeDrivingDistances(city, src, drivingParentMap);
+    auto walkingDistances = computeWalkingDistances(city, dest, maxWalkingTime, walkingParentMap);
+    Vertex<Location>* bestParkingSpot = findBestParkingSpot(drivingDistances, walkingDistances, maxWalkingTime);
+
+    if (!bestParkingSpot) {
+        std::cout << "No valid parking spot found within constraints" << std::endl;
+        return;
     }
 
-    if (parkingMap.empty()) {
-        std::cout << "There is no parking available!" << std::endl;
-        return paths;
-    }
+    auto drivingRoute = reconstructPath(src, bestParkingSpot, drivingParentMap);
+    auto walkingRoute = reconstructPath(bestParkingSpot, dest, walkingParentMap);
 
-    src->setDist(0);
-    pq.insert(src);
+    printPath(drivingRoute, "DrivingRoute:");
+    std::cout << "ParkingNode: " << bestParkingSpot->getInfo().getId() << std::endl;
+    printPath(walkingRoute, "WalkingRoute:");
 
-    // 1st Dijkstra - Calculates minimum distances to all parking spots
-    while (!pq.empty()) {
-        Vertex<Location>* current = pq.extractMin();
-        current->setVisited(true);
-
-        for (Edge<Location>* street : current->getAdj()) {
-            if (street->getTime(false) == -1 || !street->isAvailable()) {
-                continue;
-            }
-            Vertex<Location>* next = street->getDest();
-
-            if (next->isVisited() || !next->getInfo().isAvailable()) {
-                continue;  // Skip visited nodes
-            }
-
-            double newDist = current->getDist() + street->getTime(false);
-
-            if (newDist < next->getDist() || newDist == next->getDist()) { // Considering multiple paths
-                next->setDist(newDist);
-                if (newDist < next->getDist()) { // Clearing paths if new shortest path found
-                    next->clearPaths();
-                }
-                next->setPaths(street);  // Store the edge, not the vertex
-                if (next->getQueueIndex() == 0) {  // If not in the queue, insert it
-                    pq.insert(next);
-                } else {  // If already in the queue, update it
-                    pq.decreaseKey(next);
-                }
-            }
-        }
-    }
-
-
-    for (Vertex<Location>* location : city->getVertexSet()) {
-        location->setVisited(false);
-        location->setQueueIndex(0);
-        if (location->getInfo().hasParking()) {
-            parkingMap[location] = location->getDist(); // Saving old distances
-            location->setDist(0); // Setting all parking spots as starting nodes
-            continue;
-        }
-        location->setDist(std::numeric_limits<double>::infinity());
-    }
-
-    std::vector<std::pair<Vertex<Location>*, int>> sortedMap;
-    for (auto it : parkingMap) {
-        sortedMap.push_back(it);
-    }
-    std::sort(sortedMap.begin(), sortedMap.end(), compareMap);
-    for (auto parkingSpots : sortedMap) {
-        pq.insert(parkingSpots.first);
-    }
-
-    int currentTime = maxWalkingTime;
-
-    while (!pq.empty()) {
-        Vertex<Location>* current = pq.extractMin();
-        current->setVisited(true);
-
-        for (Edge<Location>* street : current->getAdj()) {
-            if (!street->isAvailable()) {
-                continue;
-            }
-            Vertex<Location>* next = street->getDest();
-
-            if (next->isVisited() || !next->getInfo().isAvailable()) {
-                continue;  // Skip visited nodes
-            }
-
-            double newDist = current->getDist() + street->getTime(false);
-
-            if (newDist < next->getDist()) {
-                next->setDist(newDist);
-                next->setPaths(street);  // Store the edge, not the vertex
-                if (next->getQueueIndex() == 0) {  // If not in the queue, insert it
-                    pq.insert(next);
-                } else {  // If already in the queue, update it
-                    pq.decreaseKey(next);
-                }
-            }
-        }
-    }
-    return paths;
 }
 
 
@@ -600,7 +650,7 @@ void menu(Graph<Location> *cityGraph)
                     break;
                 }
 
-                auto x = walkingDijkstra(cityGraph, startPoint, endPoint, maxWalkingTime);
+                findBestRouteDrivingWalking(cityGraph, startPoint, endPoint, maxWalkingTime);
                 // Choose segments to avoid
                 // Choose cities to avoid
 
