@@ -1,8 +1,8 @@
 #include <iostream>      // Input/output stream library
 #include <iomanip>       // Input/output manipulation library
+#include <set>
 #include <vector>        // Vector container library
 #include <string>        // String library
-#include <stack>         // Stack library
 #include <unordered_map> // Unordered map library
 
 #include "file_handling/CSVReader.h" // CSVReader header file
@@ -135,6 +135,12 @@ std::unordered_map<Vertex<Location>*, double> computeDrivingDistances(const Grap
     return drivingDistances;
 }
 
+struct CompareByDistance {
+    bool operator()(Vertex<Location>* a, Vertex<Location>* b) const {
+        return a->getDist() <=  b->getDist();
+    }
+};
+
 std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Graph<Location>* city, Vertex<Location>* dest, int maxWalkingTime, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> &walkingParentMap) {
 
     std::unordered_map<Vertex<Location>*, double> walkingDistances;
@@ -142,8 +148,8 @@ std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Grap
 
     for (Vertex<Location>* location : city->getVertexSet()) {
         location->setVisited(false);
-        location->setDist(std::numeric_limits<double>::infinity());
         location->setQueueIndex(0);
+        location->setDist(std::numeric_limits<double>::infinity());
     }
 
     dest->setDist(0);
@@ -167,8 +173,8 @@ std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Grap
             if (newDist < next->getDist()) {
                 next->setDist(newDist);
                 walkingDistances[next] = newDist;
-                walkingParentMap[current].clear(); //Storing parents in reverse order, since we are starting at dest
-                walkingParentMap[current].push_back(next);
+                walkingParentMap[next].clear();
+                walkingParentMap[next].push_back(current);
                 if (next->getQueueIndex() == 0) {
                     pq.insert(next);
                 }
@@ -177,7 +183,7 @@ std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Grap
                 }
             }
             else if (newDist == next->getDist()) {
-                walkingParentMap[current].push_back(next);
+                walkingParentMap[next].push_back(current);
             }
         }
     }
@@ -199,8 +205,6 @@ Vertex<Location>* findBestParkingSpot(std::unordered_map<Vertex<Location>*, doub
 
         double totalTime = drivingTime + walkingTime;
 
-        std::cout << parkingSpot->getInfo().getId() << " : " << totalTime << std::endl;
-
         if (totalTime < bestTotalTime || (totalTime == bestTotalTime && walkingTime > longestWalkingTime)) {
             bestTotalTime = totalTime;
             longestWalkingTime = walkingTime;
@@ -212,16 +216,43 @@ Vertex<Location>* findBestParkingSpot(std::unordered_map<Vertex<Location>*, doub
 }
 
 std::vector<Vertex<Location>*> reconstructPath(Vertex<Location>* start, Vertex<Location>* end, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& parentMap) {
+    // Base case: if start and end are the same, return a vector with just start
+    if (start == end) {
+        return {start};
+    }
 
-    // IMPLEMENT BFS TO FIND EXPLORE THE CORRECT PATH
+    // If end is not in parentMap or has no parents, return empty path
+    if (!parentMap.contains(end) || parentMap[end].empty()) {
+        std::cout << "No path is available to " << end->getInfo().getName() << " because it has no parents." << std::endl;
+        return {};
+    }
+
+    for (auto parent : parentMap[end]) {
+        auto path = reconstructPath(start, parent, parentMap);
+
+        if (!path.empty()) {
+            path.push_back(end);
+            return path;
+        }
+    }
+
+    std::cout << "No valid path found to " << end->getInfo().getName() << std::endl;
+    return {};
 }
 
 void printPath(const std::vector<Vertex<Location>*>& path, const std::string& label) {
+    int index = 0;
+    const int lastIndex = path.size() - 1;
+
     std::cout << label << ": ";
-    for (auto node : path) {
-        std::cout << node->getInfo().getId() << " -> ";
+    for (auto location : path) {
+        if (index == lastIndex) {
+            std::cout << location->getInfo().getId();
+            break;
+        }
+        std::cout << location->getInfo().getId() << " -> ";
+        index++;
     }
-    std::cout << "END" << std::endl;
 }
 
 void findBestRouteDrivingWalking(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime) {
@@ -262,12 +293,18 @@ void findBestRouteDrivingWalking(const Graph<Location>* city, Vertex<Location>* 
     }
 
     auto drivingRoute = reconstructPath(src, bestParkingSpot, drivingParentMap);
-    auto walkingRoute = reconstructPath(bestParkingSpot, dest, walkingParentMap);
+    auto walkingRoute = reconstructPath(dest, bestParkingSpot, walkingParentMap);
+    std::ranges::reverse(walkingRoute); // Since we started from the destination, we need to reverse the path
+    int bestDrivingTime = static_cast<int>(drivingDistances.find(bestParkingSpot)->second);
+    int bestWalkingTime = static_cast<int>(walkingDistances.find(bestParkingSpot)->second);
 
     printPath(drivingRoute, "DrivingRoute:");
+    std::cout << " (" << bestDrivingTime << ")" << std::endl;
     std::cout << "ParkingNode: " << bestParkingSpot->getInfo().getId() << std::endl;
     printPath(walkingRoute, "WalkingRoute:");
+    std::cout << " (" << bestWalkingTime << ")" << std::endl;
 
+    std::cout << "TotalTime: " << bestDrivingTime + bestWalkingTime << std::endl;
 }
 
 
