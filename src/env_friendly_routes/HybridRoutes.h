@@ -15,7 +15,7 @@
 class HybridRoutes {
 public:
     explicit HybridRoutes(Graph<Location>* cityGraph);
-    std::vector<Vertex<Location>*> findBestHybridRoute(Graph<Location>* cityGraph, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime);
+    void findBestHybridRoute(Graph<Location>* cityGraph, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime);
 private:
     Graph<Location>* graph;
 
