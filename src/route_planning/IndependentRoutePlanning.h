@@ -12,7 +12,6 @@
 namespace IndependentRoutePlanning {
     void planDrivingRoute(Graph<Location>* cityGraph);
     std::vector<Vertex<Location>*> findBestDrivingRoute(Graph<Location>* cityGraph, Vertex<Location>* start, Vertex<Location>* end);
-    void printRoute(const std::vector<Vertex<Location>*>& path, const std::string& label);
 }
 
 #endif

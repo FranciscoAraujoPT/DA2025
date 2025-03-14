@@ -12,7 +12,6 @@
 namespace RestrictedRoutePlanning {
     void planRestrictedRoute(Graph<Location>* cityGraph);
     std::vector<Vertex<Location>*> findMultiStopRoute(Graph<Location>* cityGraph, Vertex<Location>* start, Vertex<Location>* end, std::vector<Vertex<Location>*>& stopLocations, double& bestDistance);
-    void printRoute(const std::vector<Vertex<Location>*>& path, double bestDistance);
 }
 
 #endif

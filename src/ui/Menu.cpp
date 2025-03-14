@@ -11,7 +11,7 @@ void menu(Graph<Location> *cityGraph)
         {
             case 1:
             {
-                printReport("Locations", cityGraph);
+                Utils::printReport("Locations", cityGraph);
                 break;
             }
 

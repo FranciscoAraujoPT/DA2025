@@ -26,7 +26,7 @@ namespace HybridRoutes {
 void handleEnvFriendlyRoute(Graph<Location>* cityGraph) {
     Vertex<Location>* startPoint = nullptr, *endPoint = nullptr;
     int maxWalkingTime = 0;
-    int outcome = chooseStartAndEndingCitiesEnvFriendly(cityGraph, startPoint, endPoint, maxWalkingTime);
+    int outcome = Utils::chooseStartAndEndingCitiesEnvFriendly(cityGraph, startPoint, endPoint, maxWalkingTime);
 
     if (outcome == 0) {
         std::cerr << "Error: Didn't find one or both cities" << std::endl;

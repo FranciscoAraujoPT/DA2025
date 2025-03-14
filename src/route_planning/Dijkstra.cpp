@@ -78,10 +78,5 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
     path.push_back(src);
     std::reverse(path.begin(), path.end());
 
-    // **Print results**
-    for (size_t i = 0; i < path.size(); ++i) {
-
-
-    }
     return path;
 }

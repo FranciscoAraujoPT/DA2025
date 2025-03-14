@@ -4,19 +4,20 @@ namespace RestrictedRoutePlanning {
 
 void planRestrictedRoute(Graph<Location>* cityGraph) {
     Vertex<Location> *startPoint = nullptr, *endPoint = nullptr;
-    if (!chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
+    if (!Utils::chooseStartAndEndingCities(cityGraph, startPoint, endPoint)) {
         std::cerr << "Error: Didn't find one or both cities" << std::endl;
         return;
     }
 
-    chooseNodesAndSegmentsToAvoid(cityGraph);
-    std::vector<Vertex<Location>*> stopLocations = chooseMiddlePoint(cityGraph);
+    Utils::chooseNodesAndSegmentsToAvoid(cityGraph);
+    std::vector<Vertex<Location>*> stopLocations = Utils::chooseMiddlePoint(cityGraph);
 
     double bestDistance = 0;
     std::vector<Vertex<Location>*> totalPath = findMultiStopRoute(cityGraph, startPoint, endPoint, stopLocations, bestDistance);
 
     if (!totalPath.empty()) {
-        printRoute(totalPath, bestDistance);
+        std::cout << "Best Driving Route: ";
+        Utils::printRoute(totalPath, bestDistance);
     }
 }
 
@@ -51,23 +52,6 @@ std::vector<Vertex<Location>*> findMultiStopRoute(Graph<Location>* cityGraph, Ve
     }
 
     return {};
-}
-
-void printRoute(const std::vector<Vertex<Location>*>& path, double bestDistance) {
-    if (path.empty()) {
-        std::cerr << "Error: No valid route found." << std::endl;
-        return;
-    }
-
-    std::cout << "Best Route: ";
-    for (size_t i = 0; i < path.size(); ++i) {
-        std::cout << path[i]->getInfo().getName() << "(" << path[i]->getInfo().getId() << ")";
-        if (i < path.size() - 1) {
-            std::cout << " -> ";
-        } else {
-            std::cout << "\t Best Time: " << bestDistance << std::endl;
-        }
-    }
 }
 
 }
