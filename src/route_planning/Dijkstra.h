@@ -1,7 +1,3 @@
-//
-// Created by barroco on 3/12/25.
-//
-
 #ifndef DIJKSTRA_H
 #define DIJKSTRA_H
 
@@ -10,4 +6,4 @@
 
 std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest);
 
-#endif //DIJKSTRA_H
+#endif

@@ -1,17 +1,25 @@
-//
-// Created by barroco on 3/12/25.
-//
 #include "Utils.h"
 
-int chooseStartAndEndingCities(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint) {
-    int startingCity, destCity;
-    std::cout << "Choose the starting city (Id number):" << std::endl;
-    std::cin >> startingCity;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Choose the destination: (Id number):" << std::endl;
-    std::cin >> destCity;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+int getValidatedInt(const std::string& prompt) {
+    int value;
+    while (true) {
+        std::cout << prompt;
+        std::cin >> value;
 
+        if (std::cin.fail()) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "Invalid input. Please enter a valid number." << std::endl;
+        } else {
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            return value;
+        }
+    }
+}
+
+int chooseStartAndEndingCities(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint) {
+    int startingCity = getValidatedInt("Choose the starting city (Id number): ");
+    int destCity = getValidatedInt("Choose the destination (Id number): ");
 
     for (Vertex<Location> *location : cityGraph->getVertexSet()) {
         if (location->getInfo().getId() == startingCity) {
@@ -112,7 +120,6 @@ std::vector<Vertex<Location>*> chooseMiddlePoint(Graph<Location>* cityGraph) {
     std::getline(std::cin, input);
     std::istringstream stream(input); // Convert the line into a stream
 
-
     int num, found = 0;;
     std::vector<int> stopNodesId;
 
@@ -138,16 +145,9 @@ std::vector<Vertex<Location>*> chooseMiddlePoint(Graph<Location>* cityGraph) {
 }
 
 int chooseStartAndEndingCitiesEnvFriendly(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint, int &maxWalkingTime) {
-    int startingCity, destCity;
-    std::cout << "Choose the starting city (Id number):" << std::endl;
-    std::cin >> startingCity;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Choose the destination: (Id number):" << std::endl;
-    std::cin >> destCity;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cout << "Choose the walking time:" << std::endl;
-    std::cin >> maxWalkingTime;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    int startingCity = getValidatedInt("Choose the starting city (Id number): ");
+    int destCity = getValidatedInt("Choose the destination (Id number): ");
+    maxWalkingTime = getValidatedInt("Choose the maximum walking time: ");
 
 
     for (Vertex<Location> *location : cityGraph->getVertexSet()) {

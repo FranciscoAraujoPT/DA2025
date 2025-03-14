@@ -1,7 +1,3 @@
-//
-// Created by barroco on 3/12/25.
-//
-
 /*
 Develop functionality to plan routes that combine driving and walking, allowing users to:
     1. Drive the first section of the route and then park the vehicle.
@@ -25,9 +21,30 @@ More requirements:
 
 #include "HybridRoutes.h"
 
-HybridRoutes::HybridRoutes(Graph<Location>* cityGraph) : graph(cityGraph) {}
+namespace HybridRoutes {
 
-void HybridRoutes::findBestHybridRoute(Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime) {
+void handleEnvFriendlyRoute(Graph<Location>* cityGraph) {
+    Vertex<Location>* startPoint = nullptr, *endPoint = nullptr;
+    int maxWalkingTime = 0;
+    int outcome = chooseStartAndEndingCitiesEnvFriendly(cityGraph, startPoint, endPoint, maxWalkingTime);
+
+    if (outcome == 0) {
+        std::cerr << "Error: Didn't find one or both cities" << std::endl;
+        return;
+    }
+    if (outcome == 2) {
+        std::cerr << "Error: One of the cities has parking and it's not allowed" << std::endl;
+        return;
+    }
+    if (outcome == 3) {
+        std::cerr << "Error: The cities are adjacent and it's not allowed" << std::endl;
+        return;
+    }
+
+    findBestHybridRoute(cityGraph, startPoint, endPoint, maxWalkingTime);
+}
+
+void findBestHybridRoute(Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int maxWalkingTime) {
     std::vector<std::vector<Vertex<Location>*>> paths;
 
     if (!src || !dest) {
@@ -79,7 +96,7 @@ void HybridRoutes::findBestHybridRoute(Graph<Location>* city, Vertex<Location>* 
     std::cout << "TotalTime: " << bestDrivingTime + bestWalkingTime << std::endl;
 }
 
-std::unordered_map<Vertex<Location>*, double> HybridRoutes::computeDrivingDistances(const Graph<Location>* city, Vertex<Location>* src, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& drivingParentMap) {
+std::unordered_map<Vertex<Location>*, double> computeDrivingDistances(const Graph<Location>* city, Vertex<Location>* src, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& drivingParentMap) {
     std::unordered_map<Vertex<Location>*, double> drivingDistances;
     MutablePriorityQueue<Vertex<Location>> pq;
 
@@ -133,7 +150,7 @@ std::unordered_map<Vertex<Location>*, double> HybridRoutes::computeDrivingDistan
     return drivingDistances;
 }
 
-std::unordered_map<Vertex<Location>*, double> HybridRoutes::computeWalkingDistances(const Graph<Location>* city, Vertex<Location>* dest, int maxWalkingTime, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> &walkingParentMap) {
+std::unordered_map<Vertex<Location>*, double> computeWalkingDistances(const Graph<Location>* city, Vertex<Location>* dest, int maxWalkingTime, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> &walkingParentMap) {
 
     std::unordered_map<Vertex<Location>*, double> walkingDistances;
     MutablePriorityQueue<Vertex<Location>> pq;
@@ -183,7 +200,7 @@ std::unordered_map<Vertex<Location>*, double> HybridRoutes::computeWalkingDistan
     return walkingDistances;
 }
 
-Vertex<Location>* HybridRoutes::findBestParkingSpot(std::unordered_map<Vertex<Location>*, double> &drivingDistances, std::unordered_map<Vertex<Location>*, double> &walkingDistances, int maxWalkingTime) {
+Vertex<Location>* findBestParkingSpot(std::unordered_map<Vertex<Location>*, double> &drivingDistances, std::unordered_map<Vertex<Location>*, double> &walkingDistances, int maxWalkingTime) {
 
     Vertex<Location>* bestParkingSpot = nullptr;
     double bestTotalTime = std::numeric_limits<double>::infinity();
@@ -207,7 +224,7 @@ Vertex<Location>* HybridRoutes::findBestParkingSpot(std::unordered_map<Vertex<Lo
     return bestParkingSpot;
 }
 
-std::vector<Vertex<Location>*> HybridRoutes::reconstructPath(Vertex<Location>* start, Vertex<Location>* end, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& parentMap) {
+std::vector<Vertex<Location>*> reconstructPath(Vertex<Location>* start, Vertex<Location>* end, std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>>& parentMap) {
     // Base case: if start and end are the same, return a vector with just start
     if (start == end) {
         return {start};
@@ -232,7 +249,7 @@ std::vector<Vertex<Location>*> HybridRoutes::reconstructPath(Vertex<Location>* s
     return {};
 }
 
-void HybridRoutes::printPath(const std::vector<Vertex<Location>*>& path, const std::string& label) {
+void printPath(const std::vector<Vertex<Location>*>& path, const std::string& label) {
     int index = 0;
     const int lastIndex = path.size() - 1;
 
@@ -246,3 +263,5 @@ void HybridRoutes::printPath(const std::vector<Vertex<Location>*>& path, const s
         index++;
     }
 }
+}
+

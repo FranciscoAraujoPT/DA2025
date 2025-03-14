@@ -1,7 +1,3 @@
-//
-// Created by barroco on 3/12/25.
-//
-
 #include "Dijkstra.h"
 
 
@@ -63,7 +59,6 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
 
     // **If no path was found**
     if (dest->getDist() == std::numeric_limits<double>::infinity()) {
-        std::cout << "No path found!" << std::endl;
         return path;
     }
 
@@ -74,7 +69,7 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
     while (v != src) {
         Edge<Location>* edge = v->getPath();
         if (!edge) {
-            std::cout << "Path reconstruction failed!" << std::endl;
+            std::cerr << "Error: Path reconstruction failed!" << std::endl;
             return path;
         }
         path.push_back(v);
