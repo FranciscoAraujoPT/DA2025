@@ -48,9 +48,7 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
-    void setPaths(Edge<T> *path); // Added to accommodate multiple paths
     Edge<T> * addEdge(Vertex *d, double walking, double driving);
-    void clearPaths();
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
@@ -273,11 +271,6 @@ Edge<T> *Vertex<T>::getPath() const {
     return this->path;
 }
 
-template <class T> // Added to accommodate multiple paths
-std::vector<Edge<T>> *Vertex<T>::getPaths() const {
-    return this->paths;
-}
-
 template <class T>
 std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
     return this->incoming;
@@ -316,16 +309,6 @@ void Vertex<T>::setDist(double dist) {
 template <class T>
 void Vertex<T>::setPath(Edge<T> *path) {
     this->path = path;
-}
-
-template <class T> // Added to accommodate multiple paths
-void Vertex<T>::setPaths(Edge<T> *path) {
-    paths.push_back(path);
-}
-
-template <class T> // Added to accommodate multiple paths
-void Vertex<T>::clearPaths() {
-    paths.clear();
 }
 
 template <class T>

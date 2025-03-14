@@ -147,47 +147,10 @@ namespace Utils {
         return stopLocations;
     }
 
-    int chooseStartAndEndingCitiesEnvFriendly(Graph<Location>* cityGraph, Vertex<Location> *&startPoint, Vertex<Location> *&endPoint, int &maxWalkingTime) {
-        int startingCity = getValidatedInt("Choose the starting city (Id number): ");
-        int destCity = getValidatedInt("Choose the destination (Id number): ");
-        maxWalkingTime = getValidatedInt("Choose the maximum walking time: ");
-
-
-        for (Vertex<Location> *location : cityGraph->getVertexSet()) {
-            if (location->getInfo().getId() == startingCity) {
-                if (location->getInfo().hasParking()) {
-                    return 2;
-                }
-                if (checkStartAndEndingCitiesAdjacency(location->getAdj(), destCity)) {
-                    return 3;
-                }
-                startPoint = location;
-            }
-            if (location->getInfo().getId() == destCity) {
-                if (location->getInfo().hasParking()) {
-                    return 2;
-                }
-                if (checkStartAndEndingCitiesAdjacency(location->getAdj(), startingCity)) {
-                    return 3;
-                }
-                endPoint = location;
-            }
-            Location aux = location->getInfo();
-            aux.setAvailability(true);
-            location->setInfo(aux);
-        }
-
-        if (startPoint && endPoint) {
-            return 1;
-        }
-
-        return 0;
-    }
-
-    int checkStartAndEndingCitiesAdjacency(std::vector<Edge<Location> *> streets, int destCity) {
+    int checkStartAndEndingCitiesAdjacency(const Vertex<Location> &startCity, const Vertex<Location> &destCity) {
         int flag = 0;
-        for (auto dest : streets) {
-            if (dest->getDest()->getInfo().getId() == destCity)
+        for (auto location : startCity.getAdj()) {
+            if (location->getDest()->getInfo().getId() == destCity.getInfo().getId())
                 flag = 1;
         }
         return flag;
