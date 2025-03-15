@@ -69,8 +69,14 @@ namespace HybridRoutes {
         std::unordered_map<Vertex<Location>*, std::vector<Vertex<Location>*>> walkingParentMap;
         MutablePriorityQueue<Vertex<Location>> pq;
 
+        std::cout << "Choose Driving Restrictions:" << std::endl;
+        Utils::chooseNodesAndSegmentsToAvoid(city);
         auto drivingDistances = computeDrivingDistances(city, src, drivingParentMap);
+
+        std::cout << "Choose Walking Restrictions:" << std::endl;
+        Utils::chooseNodesAndSegmentsToAvoid(city);
         auto walkingDistances = computeWalkingDistances(city, dest, maxWalkingTime, walkingParentMap);
+
         Vertex<Location>* bestParkingSpot = findBestParkingSpot(drivingDistances, walkingDistances, maxWalkingTime);
 
         if (!bestParkingSpot) {
