@@ -32,11 +32,6 @@ void menu(Graph<Location> *cityGraph)
                 HybridRoutes::handleEnvFriendlyRoute(cityGraph);
                 break;
             }
-            case 5:
-            {
-                std::cout << "Approximate Solution" << std::endl;
-                break;
-            }
             case 0:
             {
                 std::cout << "Exiting..." << std::endl;
@@ -54,7 +49,6 @@ void printMenuOptions()
     std::cout << "2. Independent Route Planning" << std::endl;
     std::cout << "3. Restricted Route Planning" << std::endl;
     std::cout << "4. Environmentally-Friendly Route Planning" << std::endl;
-    std::cout << "5. Approximate Solution" << std::endl;
     std::cout << "0. Exit" << std::endl;
 }
 
