@@ -29,7 +29,7 @@ public:
     bool isVisited() const;
     bool isProcessing() const;
     unsigned int getIndegree() const;
-    double getDist() const;
+    int getDist() const;
     Edge<T> *getPath() const;
     std::vector<Edge<T>> *getPaths() const; // Added to accommodate multiple paths
     std::vector<Edge<T> *> getIncoming() const;
@@ -46,7 +46,7 @@ public:
 
     void setQueueIndex(int value);
     void setIndegree(unsigned int indegree);
-    void setDist(double dist);
+    void setDist(int dist);
     void setPath(Edge<T> *path);
     Edge<T> * addEdge(Vertex *d, double walking, double driving);
     bool removeEdge(T in);
@@ -62,7 +62,7 @@ protected:
     bool processing = false; // used by isDAG (in addition to the visited attribute)
     int low = -1, num = -1; // used by SCC Tarjan
     unsigned int indegree; // used by topsort
-    double dist = 0;
+    int dist = 0;
     Edge<T> *path = nullptr;
     std::vector<Edge<T>*> paths; // Added to accommodate multiple paths
 
@@ -262,7 +262,7 @@ unsigned int Vertex<T>::getIndegree() const {
 }
 
 template <class T>
-double Vertex<T>::getDist() const {
+int Vertex<T>::getDist() const {
     return this->dist;
 }
 
@@ -302,7 +302,7 @@ void Vertex<T>::setIndegree(unsigned int indegree) {
 }
 
 template <class T>
-void Vertex<T>::setDist(double dist) {
+void Vertex<T>::setDist(int dist) {
     this->dist = dist;
 }
 

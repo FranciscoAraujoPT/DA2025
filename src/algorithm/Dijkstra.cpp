@@ -1,7 +1,7 @@
 #include "Dijkstra.h"
 
 
-std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest) {
+std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Location>* src, Vertex<Location>* dest, int currentBest, bool isWalking) {
     std::vector<Vertex<Location>*> path;
     if (!src || !dest) {
         std::cout << "Invalid source or destination!" << std::endl;
@@ -20,7 +20,7 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
     for (Vertex<Location>* location : city->getVertexSet()) {
         location->setVisited(false);
         location->setPath(nullptr);
-        location->setDist(std::numeric_limits<double>::infinity());
+        location->setDist(std::numeric_limits<int>::max());
         location->setQueueIndex(0);
     }
 
@@ -31,10 +31,17 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
         Vertex<Location>* current = pq.extractMin();
         current->setVisited(true);
 
-        if (current == dest) break;  // Stop early if destination is reached
+        if (current == dest) {
+            break;  // Stop early if destination is reached
+        }
+
+        if (current->getDist() > currentBest) {
+            continue;
+        }
+
 
         for (Edge<Location>* street : current->getAdj()) {
-            if (street->getTime(false) == -1 || !street->isAvailable()) {
+            if (street->getTime(isWalking) == -1 || !street->isAvailable()) {
                 continue;
             }
             Vertex<Location>* next = street->getDest();
@@ -43,9 +50,9 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
                 continue;  // Skip visited nodes
             }
 
-            double newDist = current->getDist() + street->getTime(false);
+            double newDist = current->getDist() + street->getTime(isWalking);
 
-            if (newDist < next->getDist()) {
+            if (newDist < next->getDist() && newDist <= currentBest) {
                 next->setDist(newDist);
                 next->setPath(street);  // Store the edge, not the vertex
                 if (next->getQueueIndex() == 0) {  // If not in the queue, insert it
@@ -58,7 +65,7 @@ std::vector<Vertex<Location>*> dijkstra(const Graph<Location>* city, Vertex<Loca
     }
 
     // **If no path was found**
-    if (dest->getDist() == std::numeric_limits<double>::infinity()) {
+    if (dest->getDist() == std::numeric_limits<int>::max()) {
         return path;
     }
 
