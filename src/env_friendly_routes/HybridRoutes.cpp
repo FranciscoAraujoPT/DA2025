@@ -1,24 +1,3 @@
-/*
-Develop functionality to plan routes that combine driving and walking, allowing users to:
-    1. Drive the first section of the route and then park the vehicle.
-    2. Walk the remaining distance to the destination.
-For this part of the project, consider the following assumptions:
-    ● The origin and destination cannot be adjacent nodes.                                                                  DONE
-    ● The origin and destination cannot be parking nodes.                                                                   DONE
-    ● All explored routes must include at least one driving segment and one walking segment.
-In addition to the origin and destination, the user provides the following parameter:
-    ● Max. Walking Time: Time the user is willing to walk after parking
-More requirements:
-    ● The best route must include at least one driving segment and one walking segment
-    ● The goal is to minimize both driving and walking time
-    ● Should there be two or more feasible routes with the same overall minimum travel time,
-      you should select the one with the longest walking section
-    ● No additional intermediate stop points are allowed in this mode
-    ● The user may choose to exclude selected nodes and segments from either the driving or walking sections of travel
-    ● If no suitable route is found that satisfies the requirements, indicate which requirements cannot
-      be met, i.e., walking time exceeds predefined maximum limit or absence of parking, or both.
-*/
-
 #include "HybridRoutes.h"
 
 namespace HybridRoutes {

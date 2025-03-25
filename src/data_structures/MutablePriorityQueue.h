@@ -1,5 +1,5 @@
-/*
- * MutablePriorityQueue.h
+/**
+ * @file MutablePriorityQueue.h
  * A simple implementation of mutable priority queues, required by Dijkstra algorithm.
  *
  * Created on: 17/03/2018
@@ -12,20 +12,63 @@
 #include <vector>
 
 /**
- * class T must have: (i) accessible field int queueIndex; (ii) operator< defined.
+ * @class MutablePriorityQueue
+ * @brief A priority queue that allows updating the priority of its elements.
+ *
+ * This class supports efficient key updates, which is useful for algorithms like Dijkstra.
+ * @tparam T The type of elements stored in the queue. Must have an `int queueIndex` and support comparison with `<`.
  */
 
 template <class T>
 class MutablePriorityQueue {
-    std::vector<T *> H;
+    std::vector<T *> H; /**< Binary heap of elements. */
+
+    /**
+     * @brief Moves an element up in the heap to restore heap property.
+     * @param i The index of the element to move up.
+     */
     void heapifyUp(unsigned i);
+
+    /**
+     * @brief Moves an element down in the heap to restore heap property.
+     * @param i The index of the element to move down.
+     */
     void heapifyDown(unsigned i);
+
+    /**
+     * @brief Sets the element at a given index in the heap.
+     * @param i The index to set.
+     * @param x Pointer to the element to set.
+     */
     inline void set(unsigned i, T * x);
 public:
+    /**
+     * @brief Constructs an empty MutablePriorityQueue.
+     */
     MutablePriorityQueue();
+
+    /**
+     * @brief Inserts an element into the priority queue.
+     * @param x Pointer to the element to be inserted.
+    */
     void insert(T * x);
+
+    /**
+     * @brief Extracts the element with the minimum key (highest priority).
+     * @return Pointer to the extracted element.
+     */
     T * extractMin();
+
+    /**
+     * @brief Decreases the key of an element and restores heap order.
+     * @param x Pointer to the element whose key was decreased.
+     */
     void decreaseKey(T * x);
+
+    /**
+     * @brief Checks whether the priority queue is empty.
+     * @return True if the queue is empty, false otherwise.
+     */
     bool empty();
 };
 
