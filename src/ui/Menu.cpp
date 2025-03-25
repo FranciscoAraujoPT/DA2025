@@ -7,7 +7,7 @@ void menu(Graph<Location> *cityGraph)
     while (menuOpen)
     {
         printMenuOptions();
-        switch (int choice = getUserChoice(0,5))
+        switch (int choice = getUserChoice(0,4))
         {
             case 1:
             {
