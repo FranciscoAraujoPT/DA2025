@@ -29,7 +29,7 @@ void menu(Graph<Location> *cityGraph)
 
             case 4:
             {
-                HybridRoutes::handleEnvFriendlyRoute(cityGraph);
+                HybridRoutes::planEnvFriendlyRoute(cityGraph);
                 break;
             }
             case 0:

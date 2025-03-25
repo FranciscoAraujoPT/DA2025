@@ -11,7 +11,8 @@
 #include "../utils/Utils.h"
 
 namespace HybridRoutes {
-    void handleEnvFriendlyRoute(Graph<Location>* cityGraph);
+    void findBestEnvFriendlyRoute(Graph<Location>* cityGraph, Vertex<Location>* startPoint, Vertex<Location>* endPoint, const std::vector<Vertex<Location>*> &parkingSpots, int maxWalkingTime);
+    void planEnvFriendlyRoute(Graph<Location>* cityGraph);
 }
 
 #endif
