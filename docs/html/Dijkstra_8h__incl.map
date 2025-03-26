@@ -1,0 +1,25 @@
+<map id="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/algorithm/Dijkstra.h" name="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/algorithm/Dijkstra.h">
+<area shape="rect" id="Node000001" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="287,5,506,60"/>
+<area shape="rect" id="Node000002" href="$Graph_8h.html" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="172,108,306,148"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="353,62,284,103,281,99,351,58"/>
+<area shape="rect" id="Node000009" href="$Location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="533,108,668,148"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="455,58,548,100,545,105,452,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="514,196,594,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="307,143,501,192,500,197,306,149"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="161,269,224,295"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="172,143,78,165,39,180,16,198,9,214,12,227,24,239,43,249,95,265,148,274,147,279,93,270,41,254,21,243,7,230,3,213,11,194,37,176,77,160,171,138"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="26,196,89,221"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="196,150,98,193,96,188,194,146"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="114,196,172,221"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="217,150,169,189,166,185,214,146"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="196,196,282,221"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="242,148,242,182,236,182,236,148"/>
+<area shape="rect" id="Node000008" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="306,196,490,221"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="278,146,363,188,361,192,276,150"/>
+<area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="365,224,237,268,236,263,364,219"/>
+<area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="591,150,570,185,565,183,587,147"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="618,196,676,221"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="614,147,635,183,631,185,609,150"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="701,196,761,221"/>
+<area shape="poly" id="edge12_Node000009_Node000011" title=" " alt="" coords="633,146,701,187,698,191,630,151"/>
+</map>

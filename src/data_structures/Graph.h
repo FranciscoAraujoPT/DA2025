@@ -1,5 +1,11 @@
-// Original code by Gonçalo Leão
-// Updated by DA 2024/2025 Team
+/**
+* @file Graph.h
+ * @brief Contains the template definitions for the Graph, Vertex, and Edge classes.
+ *
+ * This header provides a flexible graph data structure supporting directed and bidirectional edges,
+ * as well as weighted paths for multiple transportation modes (e.g., walking and driving).
+ * It includes all core components needed for graph-based algorithms and routing logic.
+ */
 
 #ifndef DA_TP_CLASSES_GRAPH
 #define DA_TP_CLASSES_GRAPH
@@ -9,21 +15,49 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
-#include "./MutablePriorityQueue.h" // not needed for now
+#include "./MutablePriorityQueue.h" ///< Required for priority-based graph algorithms (e.g., Dijkstra).
 
+/**
+ * @brief Forward declaration of Edge class.
+ *
+ * Needed because Vertex and Edge reference each other.
+ * @tparam T Type stored in the graph nodes.
+ */
 template <class T>
 class Edge;
 
+/**
+ * @brief Represents positive infinity for weighted graph algorithms.
+ */
 #define INF std::numeric_limits<double>::max()
+
 
 /************************* Vertex  **************************/
 
+/**
+ * @brief Represents a vertex (node) in a graph.
+ *
+ * Each vertex holds information of generic type `T` and maintains a list of outgoing and incoming edges.
+ * It also includes various auxiliary fields for graph algorithms like DFS, BFS, Dijkstra, and Tarjan's SCC.
+ *
+ * @tparam T The data type stored in the vertex.
+ */
 template <class T>
 class Vertex {
 public:
+    /**
+     * @brief Constructs a vertex with the given information.
+     * @param in The information to store in the vertex.
+     */
     Vertex(T in);
-    bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
 
+    /**
+     * @brief Comparison operator for priority queue operations.
+     */
+    bool operator<(Vertex<T> & vertex) const;
+
+    /// @name Getters
+    ///@{
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
     bool isVisited() const;
@@ -31,126 +65,272 @@ public:
     unsigned int getIndegree() const;
     int getDist() const;
     Edge<T> *getPath() const;
-    std::vector<Edge<T>> *getPaths() const; // Added to accommodate multiple paths
     std::vector<Edge<T> *> getIncoming() const;
     int getQueueIndex() const;
+    int getLow() const;
+    int getNum() const;
+    ///@}
 
+    /// @name Setters
+    ///@{
     void setInfo(T info);
     void setVisited(bool visited);
     void setProcessing(bool processing);
-
-    int getLow() const;
     void setLow(int value);
-    int getNum() const;
     void setNum(int value);
-
     void setQueueIndex(int value);
     void setIndegree(unsigned int indegree);
     void setDist(int dist);
     void setPath(Edge<T> *path);
+    ///@}
+
+    /**
+     * @brief Adds a new edge from this vertex to another.
+     *
+     * @param d Destination vertex.
+     * @param walking Weight or cost of walking.
+     * @param driving Weight or cost of driving.
+     * @return Pointer to the created edge.
+     */
     Edge<T> * addEdge(Vertex *d, double walking, double driving);
+
+    /**
+     * @brief Removes the edge from this vertex to the vertex containing the given value.
+     *
+     * @param in The value identifying the destination vertex.
+     * @return True if an edge was removed, false otherwise.
+     */
     bool removeEdge(T in);
+
+    /**
+     * @brief Removes all outgoing edges from this vertex.
+     */
     void removeOutgoingEdges();
 
     friend class MutablePriorityQueue<Vertex>;
+
 protected:
-    T info;                // info node
-    std::vector<Edge<T> *> adj;  // outgoing edges
+    T info;                                ///< The data stored in the vertex.
+    std::vector<Edge<T> *> adj;            ///< Outgoing edges.
+    std::vector<Edge<T> *> incoming;       ///< Incoming edges.
 
-    // auxiliary fields
-    bool visited = false; // used by DFS, BFS, Prim ...
-    bool processing = false; // used by isDAG (in addition to the visited attribute)
-    int low = -1, num = -1; // used by SCC Tarjan
-    unsigned int indegree; // used by topsort
-    int dist = 0;
-    Edge<T> *path = nullptr;
-    std::vector<Edge<T>*> paths; // Added to accommodate multiple paths
+    // Auxiliary fields used by graph algorithms
+    bool visited = false;                  ///< Used in traversal algorithms.
+    bool processing = false;               ///< Used for cycle detection (e.g. isDAG).
+    int low = -1, num = -1;                ///< Used by Tarjan's algorithm for SCC.
+    unsigned int indegree;                 ///< Used in topological sorting.
+    int dist = 0;                          ///< Used in shortest path algorithms.
+    Edge<T> *path = nullptr;               ///< Path pointer used in algorithms like Dijkstra.
+    int queueIndex = 0;                    ///< Required by MutablePriorityQueue and Union-Find.
 
-    std::vector<Edge<T> *> incoming; // incoming edges
-
-    int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
-
+    /**
+     * @brief Deletes a specific edge from the adjacency list.
+     *
+     * @param edge Pointer to the edge to delete.
+     */
     void deleteEdge(Edge<T> *edge);
 };
 
 /********************** Edge  ****************************/
 
+/**
+ * @brief Represents an edge (connection) between two vertices in a graph.
+ *
+ * Each edge supports two weight types: one for walking and one for driving.
+ * Edges can also be marked as available or unavailable and support bidirectional links.
+ *
+ * @tparam T The type of data stored in the vertices this edge connects.
+ */
 template <class T>
 class Edge {
 public:
+    /**
+     * @brief Constructs an edge between two vertices with given travel times.
+     *
+     * @param orig Pointer to the origin vertex.
+     * @param dest Pointer to the destination vertex.
+     * @param walking Time or cost associated with walking.
+     * @param driving Time or cost associated with driving.
+     */
     Edge(Vertex<T> *orig, Vertex<T> *dest, double walking, double driving);
 
+    /// @name Getters
+    ///@{
     Vertex<T> * getDest() const;
     Vertex<T> * getOrig() const;
 
+    /**
+     * @brief Gets the travel time based on travel mode.
+     *
+     * @param isWalking If true, returns walking time; otherwise, driving time.
+     * @return Travel time.
+     */
     double getTime(bool isWalking) const;
+
+    /**
+     * @brief Checks whether the edge is currently available.
+     *
+     * @return True if the edge is available, false otherwise.
+     */
     bool isAvailable() const;
+
+    /**
+     * @brief Returns the reverse edge (used for bidirectional edges).
+     *
+     * @return Pointer to the reverse edge.
+     */
+    Edge<T> *getReverse() const;
+    ///@}
+
+    /// @name Setters
+    ///@{
+    /**
+     * @brief Sets the availability status of the edge.
+     *
+     * @param isAvailable True to make the edge available, false otherwise.
+     */
     void setAvailability(bool isAvailable);
 
-    Edge<T> *getReverse() const;
-
+    /**
+     * @brief Sets the reverse edge for bidirectional connections.
+     *
+     * @param reverse Pointer to the reverse edge.
+     */
     void setReverse(Edge<T> *reverse);
+    ///@}
+
 protected:
-    Vertex<T> * dest; // destination vertex
+    Vertex<T> * dest;        ///< Destination vertex.
+    double walkingTime;      ///< Time/cost for walking through this edge.
+    double drivingTime;      ///< Time/cost for driving through this edge.
+    bool available = true;   ///< Availability of this edge (e.g., blocked roads).
 
-    double walkingTime;
-    double drivingTime;
-    bool available = true;
-
-    // used for bidirectional edges
-    Vertex<T> *orig;
-    Edge<T> *reverse = nullptr;
-
+    Vertex<T> *orig;         ///< Origin vertex.
+    Edge<T> *reverse = nullptr; ///< Reverse edge for bidirectional links.
 };
+
 
 /********************** Graph  ****************************/
 
+/**
+ * @brief Represents a generic graph structure using adjacency lists.
+ *
+ * Supports vertex and edge management, as well as support for bidirectional and weighted edges
+ * (walking and driving). It also includes auxiliary fields for pathfinding algorithms such as Floyd-Warshall.
+ *
+ * @tparam T The type of data stored in each vertex.
+ */
 template <class T>
 class Graph {
 public:
+    /**
+     * @brief Destructor to clean up dynamic memory used by the graph.
+     */
     ~Graph();
-    /*
-    * Auxiliary function to find a vertex with a given the content.
-    */
+
+    /**
+     * @brief Finds a vertex with the given content.
+     *
+     * @param in The content to search for.
+     * @return Pointer to the vertex if found, nullptr otherwise.
+     */
     Vertex<T> *findVertex(const T &in) const;
-    /*
-     *  Adds a vertex with a given content or info (in) to a graph (this).
-     *  Returns true if successful, and false if a vertex with that content already exists.
+
+    /**
+     * @brief Adds a vertex with the given content to the graph.
+     *
+     * @param in The content to store in the new vertex.
+     * @return True if the vertex was added successfully, false if a duplicate exists.
      */
     bool addVertex(const T &in);
+
+    /**
+     * @brief Removes the vertex with the given content from the graph.
+     *
+     * @param in The content identifying the vertex to remove.
+     * @return True if the vertex was found and removed, false otherwise.
+     */
     bool removeVertex(const T &in);
 
-    /*
-     * Adds an edge to a graph (this), given the contents of the source and
-     * destination vertices and the edge weight (w).
-     * Returns true if successful, and false if the source or destination vertex does not exist.
+    /**
+     * @brief Adds a directed edge from one vertex to another.
+     *
+     * @param sourc The content of the source vertex.
+     * @param dest The content of the destination vertex.
+     * @param walking Walking weight of the edge.
+     * @param driving Driving weight of the edge.
+     * @return True if the edge was successfully added, false otherwise.
      */
     bool addEdge(const T &sourc, const T &dest, double walking, double driving);
+
+    /**
+     * @brief Removes the edge from one vertex to another.
+     *
+     * @param source The content of the source vertex.
+     * @param dest The content of the destination vertex.
+     * @return True if the edge was found and removed, false otherwise.
+     */
     bool removeEdge(const T &source, const T &dest);
+
+    /**
+     * @brief Adds a bidirectional edge between two vertices.
+     *
+     * @param sourc The content of the first vertex.
+     * @param dest The content of the second vertex.
+     * @param walking Walking weight for both directions.
+     * @param driving Driving weight for both directions.
+     * @return True if both edges were added successfully, false otherwise.
+     */
     bool addBidirectionalEdge(const T &sourc, const T &dest, double walking, double driving);
 
+    /**
+     * @brief Gets the total number of vertices in the graph.
+     *
+     * @return The number of vertices.
+     */
     int getNumVertex() const;
 
+    /**
+     * @brief Gets the list of all vertices in the graph.
+     *
+     * @return Vector of pointers to vertices.
+     */
     std::vector<Vertex<T> *> getVertexSet() const;
 
 protected:
-    std::vector<Vertex<T> *> vertexSet;    // vertex set
+    std::vector<Vertex<T> *> vertexSet;    ///< Set of all vertices in the graph.
 
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
+    double ** distMatrix = nullptr;        ///< Distance matrix used in Floyd-Warshall.
+    int **pathMatrix = nullptr;            ///< Path matrix used in Floyd-Warshall.
 
-    /*
-     * Finds the index of the vertex with a given content.
+    /**
+     * @brief Finds the index of the vertex with the given content.
+     *
+     * @param in The content to search for.
+     * @return Index of the vertex, or -1 if not found.
      */
     int findVertexIdx(const T &in) const;
-    /**
-    * Auxiliary function to set the "path" field to make a spanning tree.
-    */
 
+    // Possibly used internally to set path pointers in algorithms like Prim or Kruskal.
+    // No implementation was shown for this yet.
 };
 
+/**
+ * @brief Deletes a dynamically allocated matrix of integers.
+ *
+ * @param m Pointer to the matrix.
+ * @param n Number of rows.
+ */
 void deleteMatrix(int **m, int n);
+
+/**
+ * @brief Deletes a dynamically allocated matrix of doubles.
+ *
+ * @param m Pointer to the matrix.
+ * @param n Number of rows.
+ */
 void deleteMatrix(double **m, int n);
+
 
 
 /************************* Vertex  **************************/

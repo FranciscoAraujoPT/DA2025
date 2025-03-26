@@ -8,9 +8,6 @@
 #include "utils/Utils.h"
 #include "ui/Menu.h"
 
-
-
-
 // Main function, entry point of the program
 int main()
 {

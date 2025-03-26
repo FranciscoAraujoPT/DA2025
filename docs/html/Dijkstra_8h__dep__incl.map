@@ -1,0 +1,25 @@
+<map id="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/algorithm/Dijkstra.h" name="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/algorithm/Dijkstra.h">
+<area shape="rect" id="Node000001" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="405,5,624,60"/>
+<area shape="rect" id="Node000002" href="$Dijkstra_8cpp.html" title=" " alt="" coords="5,115,224,170"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="403,66,237,111,210,118,209,113,235,105,401,61"/>
+<area shape="rect" id="Node000003" href="$HybridRoutes_8h.html" title=" " alt="" coords="248,115,499,170"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="471,70,410,117,406,113,468,66"/>
+<area shape="rect" id="Node000008" href="$IndependentRoutePlanning_8h.html" title="Declares functions for planning independent driving routes." alt="" coords="523,108,792,177"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="562,66,614,106,611,110,559,71"/>
+<area shape="rect" id="Node000010" href="$RestrictedRoutePlanning_8h.html" title="Declares functions for planning routes with restricted segments or conditions." alt="" coords="817,108,1071,177"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="633,61,817,107,816,112,632,66"/>
+<area shape="rect" id="Node000004" href="$HybridRoutes_8cpp.html" title=" " alt="" coords="115,233,381,287"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="337,181,279,234,275,230,333,177"/>
+<area shape="rect" id="Node000005" href="$Menu_8h.html" title="Provides functions for displaying and handling the menu system." alt="" coords="405,233,624,287"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="418,177,484,230,481,234,414,181"/>
+<area shape="rect" id="Node000006" href="$main_8cpp.html" title=" " alt="" coords="284,343,503,397"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="476,299,425,344,421,340,473,295"/>
+<area shape="rect" id="Node000007" href="$Menu_8cpp.html" title=" " alt="" coords="527,343,745,397"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="557,295,608,340,605,344,553,299"/>
+<area shape="poly" id="edge9_Node000008_Node000005" title=" " alt="" coords="607,188,549,235,545,231,603,184"/>
+<area shape="rect" id="Node000009" href="$IndependentRoutePlanning_8cpp.html" title=" " alt="" coords="648,225,917,295"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="706,185,748,223,744,227,702,188"/>
+<area shape="poly" id="edge12_Node000010_Node000005" title=" " alt="" coords="804,183,637,228,610,235,609,230,635,223,803,178"/>
+<area shape="rect" id="Node000011" href="$RestrictedRoutePlanning_8cpp.html" title=" " alt="" coords="942,225,1197,295"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="992,185,1034,223,1031,227,989,188"/>
+</map>

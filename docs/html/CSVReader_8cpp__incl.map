@@ -1,0 +1,36 @@
+<map id="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/data_handling/CSVReader.cpp" name="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/data_handling/CSVReader.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="614,5,857,60"/>
+<area shape="rect" id="Node000002" href="$CSVReader_8h.html" title="Provides functionality to read and parse CSV files." alt="" coords="683,108,788,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="738,60,738,94,733,94,733,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="543,269,623,295"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="683,132,591,152,551,166,527,183,522,192,521,201,527,222,541,241,559,259,555,262,537,245,522,224,516,202,517,190,523,180,548,162,589,147,682,127"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="799,189,872,214"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="752,131,811,178,808,182,748,136"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="897,189,971,214"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="765,131,893,181,891,186,763,136"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="647,269,706,295"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="734,134,688,257,683,255,729,132"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="995,189,1057,214"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="789,129,881,149,984,179,990,181,988,186,983,184,880,155,788,134"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="731,269,791,295"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="740,133,759,255,754,256,735,134"/>
+<area shape="rect" id="Node000009" href="$Graph_8h.html" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="231,181,365,221"/>
+<area shape="poly" id="edge8_Node000002_Node000009" title=" " alt="" coords="683,134,379,188,378,183,682,129"/>
+<area shape="rect" id="Node000015" href="$Location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="537,181,672,221"/>
+<area shape="poly" id="edge16_Node000002_Node000015" title=" " alt="" coords="717,136,649,177,646,172,715,131"/>
+<area shape="poly" id="edge9_Node000009_Node000003" title=" " alt="" coords="366,219,531,264,529,269,365,224"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="331,343,393,368"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="304,221,312,255,326,294,347,330,343,333,321,296,307,257,299,222"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="5,269,68,295"/>
+<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="236,224,82,270,80,265,235,219"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="93,269,151,295"/>
+<area shape="poly" id="edge12_Node000009_Node000012" title=" " alt="" coords="257,224,162,266,159,261,255,219"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="175,269,261,295"/>
+<area shape="poly" id="edge13_Node000009_Node000013" title=" " alt="" coords="280,223,242,261,238,258,277,220"/>
+<area shape="rect" id="Node000014" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="335,269,519,295"/>
+<area shape="poly" id="edge14_Node000009_Node000014" title=" " alt="" coords="331,219,398,260,395,264,328,224"/>
+<area shape="poly" id="edge15_Node000014_Node000010" title=" " alt="" coords="419,297,384,334,380,331,415,293"/>
+<area shape="poly" id="edge18_Node000015_Node000003" title=" " alt="" coords="602,222,593,256,588,255,597,221"/>
+<area shape="poly" id="edge17_Node000015_Node000006" title=" " alt="" coords="624,220,659,257,655,261,620,223"/>
+<area shape="poly" id="edge19_Node000015_Node000008" title=" " alt="" coords="643,219,727,261,724,265,641,224"/>
+</map>

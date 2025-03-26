@@ -1,0 +1,41 @@
+<map id="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/route_planning/IndependentRoutePlanning.h" name="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/route_planning/IndependentRoutePlanning.h">
+<area shape="rect" id="Node000001" title="Declares functions for planning independent driving routes." alt="" coords="472,5,741,75"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="250,357,313,383"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="472,57,356,80,293,99,230,123,168,153,111,189,60,233,17,285,10,299,8,310,10,320,16,329,39,344,73,354,157,365,236,367,236,373,156,371,72,360,37,349,13,333,5,322,3,311,5,297,13,283,56,230,108,185,165,148,227,118,291,94,354,75,471,52"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="713,284,793,309"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="703,73,733,93,756,121,770,160,773,201,770,239,763,271,758,270,765,239,768,201,765,161,751,124,729,97,700,77"/>
+<area shape="rect" id="Node000004" href="$Graph_8h.html" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="355,196,490,236"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="494,77,462,97,436,124,424,152,422,183,417,182,419,151,431,121,458,93,491,73"/>
+<area shape="rect" id="Node000009" href="$Location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="817,196,951,236"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="708,72,754,94,799,121,835,151,864,183,860,187,831,155,796,125,752,99,705,77"/>
+<area shape="rect" id="Node000012" href="$Dijkstra_8h.html" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="445,123,609,148"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="580,77,548,114,544,110,576,73"/>
+<area shape="rect" id="Node000013" href="$Utils_8h.html" title="Utility functions for handling user input, interactions with the graph and printing graph information..." alt="" coords="633,123,741,148"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="638,73,670,110,666,114,634,77"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="430,236,434,272,431,292,422,311,403,332,379,347,327,365,326,360,376,342,399,328,418,308,426,291,428,272,425,236"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="491,231,701,280,700,285,490,236"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="235,284,298,309"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="387,238,303,280,301,275,384,234"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="483,284,541,309"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="446,234,490,273,487,277,443,238"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="323,284,408,309"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="411,238,384,274,380,271,407,235"/>
+<area shape="rect" id="Node000008" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="27,284,211,309"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="356,237,177,283,175,278,355,232"/>
+<area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="146,307,243,349,241,354,144,312"/>
+<area shape="poly" id="edge13_Node000009_Node000003" title=" " alt="" coords="854,239,786,279,783,275,851,234"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="949,284,1008,309"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="909,234,956,273,952,277,905,238"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="854,284,914,309"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="887,236,887,270,881,270,881,236"/>
+<area shape="poly" id="edge16_Node000012_Node000004" title=" " alt="" coords="513,150,460,190,457,186,510,146"/>
+<area shape="poly" id="edge17_Node000012_Node000009" title=" " alt="" coords="579,145,803,194,802,200,578,151"/>
+<area shape="poly" id="edge20_Node000013_Node000002" title=" " alt="" coords="666,150,635,170,606,198,590,228,584,256,577,284,569,298,555,312,514,331,453,347,327,366,326,361,452,341,512,326,552,307,564,295,572,282,579,255,585,226,602,194,632,166,663,146"/>
+<area shape="poly" id="edge21_Node000013_Node000003" title=" " alt="" coords="694,147,746,270,741,272,689,149"/>
+<area shape="poly" id="edge24_Node000013_Node000004" title=" " alt="" coords="649,151,500,195,498,190,648,145"/>
+<area shape="poly" id="edge23_Node000013_Node000006" title=" " alt="" coords="647,151,603,169,581,182,562,198,537,234,521,272,516,270,532,232,558,194,578,178,600,164,644,146"/>
+<area shape="poly" id="edge25_Node000013_Node000009" title=" " alt="" coords="716,146,825,188,823,193,715,150"/>
+<area shape="poly" id="edge19_Node000013_Node000010" title=" " alt="" coords="742,138,803,145,869,157,928,172,950,182,966,194,977,212,983,232,985,270,980,270,978,232,973,214,962,198,948,187,926,177,868,162,802,151,741,144"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="616,203,691,229"/>
+<area shape="poly" id="edge22_Node000013_Node000014" title=" " alt="" coords="684,149,666,192,661,190,679,147"/>
+</map>

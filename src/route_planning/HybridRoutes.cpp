@@ -6,7 +6,16 @@
 #define NO_PATH_FOUND_TO_DESTINATION 3
 
 namespace HybridRoutes {
-
+    /**
+     * @brief Prints the results of the driving and walking segments of a hybrid route.
+     *
+     * Displays the driving route, parking node, walking route, and the total travel time.
+     *
+     * @param drivingPath Vector of vertices representing the driving path.
+     * @param walkingPath Vector of vertices representing the walking path.
+     * @param drivingTime Total time (in minutes) of the driving segment.
+     * @param walkingTime Total time (in minutes) of the walking segment.
+     */
     void printPathResults(std::vector<Vertex<Location>*> drivingPath, const std::vector<Vertex<Location>*> &walkingPath, int drivingTime, int walkingTime) {
         std::cout << "DrivingRoute: ";
         Utils::printRoute(drivingPath, drivingTime);
@@ -15,7 +24,17 @@ namespace HybridRoutes {
         Utils::printRoute(walkingPath, walkingTime);
         std::cout << "TotalTime: " << drivingTime + walkingTime << std::endl;
     }
-
+    /**
+     * @brief Prints the best found solution or fallback alternatives based on the result status.
+     *
+     * Depending on whether an exact path or an approximated solution was found, this function formats and prints
+     * the result(s), including fallback suggestions if needed.
+     *
+     * @param foundSolution Status code indicating which solution was found.
+     * @param solution Primary route solution (driving + walking + times).
+     * @param alternativeSolution Optional second-best solution for approximation fallback.
+     * @param maxWalkingTime Maximum walking time allowed for the user.
+     */
     void printResults(int foundSolution, std::tuple<std::vector<Vertex<Location>*>, std::vector<Vertex<Location>*>, int, int> solution, const std::tuple<std::vector<Vertex<Location>*>, std::vector<Vertex<Location>*>, int, int> &alternativeSolution, int maxWalkingTime) {
         switch (foundSolution) {
             case PATH_FOUND:
@@ -45,7 +64,14 @@ namespace HybridRoutes {
                 break;
         }
     }
-
+    /**
+     * @brief Finds all available parking spots in the graph.
+     *
+     * Iterates over all vertices in the graph and selects those that are marked as parking spots and currently available.
+     *
+     * @param cityGraph Pointer to the city graph.
+     * @return Vector of vertices that represent valid parking spots.
+     */
     std::vector<Vertex<Location>*> findAllParkingSpots(Graph<Location>* cityGraph) {
         std::vector<Vertex<Location>*> parkingSpots;
         for (Vertex<Location>* location : cityGraph->getVertexSet()) {
@@ -57,6 +83,14 @@ namespace HybridRoutes {
         return parkingSpots;
     }
 
+    /**
+     * @brief Checks if a vertex has any adjacent drivable edges.
+     *
+     * Used to determine whether the current location can be reached or exited by driving.
+     *
+     * @param startPoint Pointer to the vertex to check.
+     * @return True if the vertex has at least one drivable and available edge, false otherwise.
+     */
     bool adjacentDrivingEdges(Vertex<Location>* startPoint) {
         bool isDrivable = false;
         for (auto streets : startPoint->getAdj()) {
