@@ -14,7 +14,7 @@
 
 #include "../data_structures/Graph.h"
 #include "../data_structures/Location.h"
-#include "../route_planning/Dijkstra.h"
+#include "../algorithm/Dijkstra.h"
 #include "../utils/Utils.h"
 
 /**

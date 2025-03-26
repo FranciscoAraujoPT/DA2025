@@ -7,7 +7,7 @@ void menu(Graph<Location> *cityGraph)
     while (menuOpen)
     {
         printMenuOptions();
-        switch (int choice = getUserChoice(0,5))
+        switch (int choice = getUserChoice(0,4))
         {
             case 1:
             {
@@ -29,12 +29,7 @@ void menu(Graph<Location> *cityGraph)
 
             case 4:
             {
-                HybridRoutes::handleEnvFriendlyRoute(cityGraph);
-                break;
-            }
-            case 5:
-            {
-                std::cout << "Approximate Solution" << std::endl;
+                HybridRoutes::planEnvFriendlyRoute(cityGraph);
                 break;
             }
             case 0:
@@ -54,7 +49,6 @@ void printMenuOptions()
     std::cout << "2. Independent Route Planning" << std::endl;
     std::cout << "3. Restricted Route Planning" << std::endl;
     std::cout << "4. Environmentally-Friendly Route Planning" << std::endl;
-    std::cout << "5. Approximate Solution" << std::endl;
     std::cout << "0. Exit" << std::endl;
 }
 
