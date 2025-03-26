@@ -1,14 +1,27 @@
-#include <iostream>      // Input/output stream library
-#include <iomanip>       // Input/output manipulation library
-#include <vector>        // Vector container library
-#include <string>        // String library
-#include <unordered_map> // Unordered map library
+/**
+* @file main.cpp
+ * @brief Entry point for the Environment-Friendly Route Planning system.
+ *
+ * Loads city data and starts the interactive menu-driven application.
+ */
+#include <iostream>
+#include <iomanip>
+#include <vector>
+#include <string>
+#include <unordered_map>
 
-#include "data_handling/CSVReader.h" // CSVReader header file
+#include "data_handling/CSVReader.h"
 #include "utils/Utils.h"
 #include "ui/Menu.h"
 
-// Main function, entry point of the program
+/**
+ * @brief Entry point of the route planning system.
+ *
+ * Initializes the city graph from CSV files, loads location and distance data,
+ * and launches the user interface through the main menu.
+ *
+ * @return Exit status of the program.
+ */
 int main()
 {
     setlocale(LC_ALL, "");
