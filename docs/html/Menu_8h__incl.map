@@ -4,7 +4,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="448,59,377,80,308,110,245,144,223,165,204,197,200,211,199,226,207,256,202,257,194,227,194,211,199,195,219,161,242,140,305,106,375,75,447,54"/>
 <area shape="rect" id="Node000009" href="$Location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="691,269,826,309"/>
 <area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="667,42,855,67,942,85,1002,106,1033,123,1056,141,1073,163,1088,195,1092,209,1087,223,1071,237,1047,248,984,266,910,278,840,286,839,280,910,273,983,261,1045,243,1068,232,1083,220,1087,209,1083,197,1068,166,1052,145,1030,128,1000,110,940,90,854,72,666,47"/>
-<area shape="rect" id="Node000012" href="$HybridRoutes_8h.html" title=" " alt="" coords="811,108,989,148"/>
+<area shape="rect" id="Node000012" href="$HybridRoutes_8h.html" title="Declares functions for planning routes with both walking and driving sections." alt="" coords="811,108,989,148"/>
 <area shape="poly" id="edge13_Node000001_Node000012" title=" " alt="" coords="654,57,819,102,817,107,653,63"/>
 <area shape="rect" id="Node000015" href="$Utils_8h.html" title="Utility functions for handling user input, interactions with the graph and printing graph information..." alt="" coords="273,196,381,221"/>
 <area shape="poly" id="edge44_Node000001_Node000015" title=" " alt="" coords="448,43,413,52,379,65,348,84,323,110,316,126,314,145,320,182,315,183,308,145,311,125,319,106,345,80,377,60,411,47,447,38"/>
@@ -22,7 +22,7 @@
 <area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="185,312,105,353,103,348,183,307"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="211,357,296,383"/>
 <area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="230,309,245,343,241,346,226,311"/>
-<area shape="rect" id="Node000008" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="371,357,555,383"/>
+<area shape="rect" id="Node000008" href="$MutablePriorityQueue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="371,357,555,383"/>
 <area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="279,307,415,350,413,356,277,312"/>
 <area shape="poly" id="edge8_Node000008_Node000004" title=" " alt="" coords="454,385,419,422,415,419,450,381"/>
 <area shape="poly" id="edge11_Node000009_Node000003" title=" " alt="" coords="726,312,653,353,650,348,724,307"/>

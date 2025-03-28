@@ -21,6 +21,25 @@
  */
 namespace Utils {
     /**
+    * @brief Prompts the user to choose the dataset to use.
+    *
+    *
+    * @return A pair representing the location and distance files paths.
+    */
+    std::pair<std::string, std::string> chooseDatasetFiles();
+
+    /**
+     * @brief Gets the user's choice within a specified range.
+     *
+     * Ensures the user's input falls within the given minimum and maximum bounds.
+     *
+     * @param min The minimum valid choice.
+     * @param max The maximum valid choice.
+     * @return The valid user-selected choice.
+     */
+    int getUserChoice(int min, int max);
+
+    /**
     * @brief Prompts the user for an integer input and validates it.
      *
      * Ensures the input is a valid integer and handles input errors.
@@ -66,12 +85,25 @@ namespace Utils {
     int checkStartAndEndingCitiesAdjacency(const Vertex<Location> &startCity, const Vertex<Location> &destCity);
 
     /**
+     * @brief Counts the number of accented (non-ASCII) characters in a UTF-8 encoded string.
+     *
+     * This function scans through a UTF-8 encoded string and counts the number of
+     * non-ASCII characters (e.g., accented letters like ç, é, ã, etc.). It handles
+     * multibyte characters according to UTF-8 encoding rules.
+     *
+     * Note: Each multibyte character (2–4 bytes) is counted as a single character.
+     *
+     * @param text The UTF-8 encoded string to analyze.
+     * @return int The number of non-ASCII (accented or special) characters in the string.
+     */
+    int countSpecialChars(const std::string& text);
+
+    /**
      * @brief Prints a report of the graph based on the specified type.
      *
-     * @param reportType Type of report to generate.
      * @param cityGraph Pointer to the graph representing the city.
      */
-    void printReport(const std::string& reportType, const Graph<Location>* cityGraph);
+    void printReport(const Graph<Location>* cityGraph);
 
     /**
      * @brief Prints the calculated route and its distance.

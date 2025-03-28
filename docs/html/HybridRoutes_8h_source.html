@@ -82,36 +82,37 @@ $(document).ready(function() { init_codefold(0); });
   <div class="headertitle"><div class="title">HybridRoutes.h</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="HybridRoutes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="preprocessor">#ifndef HYBRID_ROUTES_H</span></div>
-<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="preprocessor">#define HYBRID_ROUTES_H</span></div>
-<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span> </div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;../data_structures/Graph.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;../data_structures/Location.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;../algorithm/Dijkstra.h&quot;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;../utils/Utils.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceHybridRoutes.html">HybridRoutes</a> {</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceHybridRoutes.html#a50308a244417f83b62693146bce69630">findBestEnvFriendlyRoute</a>(<a class="code hl_class" href="classEdge.html">Graph&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">cityGraph</a>,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                                   <a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">startPoint</a>,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>                                   <a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">endPoint</a>,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>                                   <span class="keyword">const</span> <a class="code hl_function" href="classEdge.html#a217515796cb237d6ed5934c27d1315ed">std::vector</a>&lt;<a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>*&gt; &amp;<a class="code hl_class" href="classEdge.html">parkingSpots</a>,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                                   <span class="keywordtype">int</span> <a class="code hl_class" href="classEdge.html">maxWalkingTime</a>);</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceHybridRoutes.html#ae595483071982d277c20fd7ac22e22c2">planEnvFriendlyRoute</a>(<a class="code hl_class" href="classEdge.html">Graph&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">cityGraph</a>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="preprocessor">#endif</span></div>
+<a href="HybridRoutes_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#ifndef HYBRID_ROUTES_H</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#define HYBRID_ROUTES_H</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;unordered_map&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;../data_structures/Graph.h&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;../data_structures/Location.h&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;../algorithm/Dijkstra.h&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;../utils/Utils.h&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceHybridRoutes.html">HybridRoutes</a> {</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceHybridRoutes.html#a50308a244417f83b62693146bce69630">findBestEnvFriendlyRoute</a>(<a class="code hl_class" href="classEdge.html">Graph&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">cityGraph</a>,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>                                   <a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">startPoint</a>,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>                                   <a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">endPoint</a>,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>                                   <span class="keyword">const</span> <a class="code hl_function" href="classEdge.html#a217515796cb237d6ed5934c27d1315ed">std::vector</a>&lt;<a class="code hl_class" href="classEdge.html">Vertex&lt;Location&gt;</a>*&gt; &amp;<a class="code hl_class" href="classEdge.html">parkingSpots</a>,</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                                   <span class="keywordtype">int</span> <a class="code hl_class" href="classEdge.html">maxWalkingTime</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="namespaceHybridRoutes.html#ae595483071982d277c20fd7ac22e22c2">planEnvFriendlyRoute</a>(<a class="code hl_class" href="classEdge.html">Graph&lt;Location&gt;</a>* <a class="code hl_class" href="classEdge.html">cityGraph</a>);</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassEdge_html"><div class="ttname"><a href="classEdge.html">Edge</a></div><div class="ttdoc">&lt; Required for priority-based graph algorithms (e.g., Dijkstra).</div><div class="ttdef"><b>Definition</b> Graph.h:145</div></div>
 <div class="ttc" id="aclassEdge_html_a217515796cb237d6ed5934c27d1315ed"><div class="ttname"><a href="classEdge.html#a217515796cb237d6ed5934c27d1315ed">Edge::Edge</a></div><div class="ttdeci">Edge(Vertex&lt; T &gt; *orig, Vertex&lt; T &gt; *dest, double walking, double driving)</div><div class="ttdoc">Constructs an edge between two vertices with given travel times.</div><div class="ttdef"><b>Definition</b> Graph.h:513</div></div>
 <div class="ttc" id="anamespaceHybridRoutes_html"><div class="ttname"><a href="namespaceHybridRoutes.html">HybridRoutes</a></div><div class="ttdoc">Provides functions to plan hybrid (car + walking) routes with an emphasis on environmental friendline...</div><div class="ttdef"><b>Definition</b> HybridRoutes.cpp:8</div></div>
 <div class="ttc" id="anamespaceHybridRoutes_html_a50308a244417f83b62693146bce69630"><div class="ttname"><a href="namespaceHybridRoutes.html#a50308a244417f83b62693146bce69630">HybridRoutes::findBestEnvFriendlyRoute</a></div><div class="ttdeci">void findBestEnvFriendlyRoute(Graph&lt; Location &gt; *cityGraph, Vertex&lt; Location &gt; *startPoint, Vertex&lt; Location &gt; *endPoint, const std::vector&lt; Vertex&lt; Location &gt; * &gt; &amp;parkingSpots, int maxWalkingTime)</div><div class="ttdoc">Finds the best environmentally friendly route that combines driving and walking.</div><div class="ttdef"><b>Definition</b> HybridRoutes.cpp:105</div></div>
-<div class="ttc" id="anamespaceHybridRoutes_html_ae595483071982d277c20fd7ac22e22c2"><div class="ttname"><a href="namespaceHybridRoutes.html#ae595483071982d277c20fd7ac22e22c2">HybridRoutes::planEnvFriendlyRoute</a></div><div class="ttdeci">void planEnvFriendlyRoute(Graph&lt; Location &gt; *cityGraph)</div><div class="ttdoc">Prompts the user for input and plans an environmentally friendly route.</div><div class="ttdef"><b>Definition</b> HybridRoutes.cpp:171</div></div>
+<div class="ttc" id="anamespaceHybridRoutes_html_ae595483071982d277c20fd7ac22e22c2"><div class="ttname"><a href="namespaceHybridRoutes.html#ae595483071982d277c20fd7ac22e22c2">HybridRoutes::planEnvFriendlyRoute</a></div><div class="ttdeci">void planEnvFriendlyRoute(Graph&lt; Location &gt; *cityGraph)</div><div class="ttdoc">Prompts the user for input and plans an environmentally friendly route.</div><div class="ttdef"><b>Definition</b> HybridRoutes.cpp:190</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

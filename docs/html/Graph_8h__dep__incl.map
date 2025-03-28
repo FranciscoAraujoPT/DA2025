@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="637,5,855,60"/>
 <area shape="rect" id="Node000002" href="$Dijkstra_8h.html" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="490,108,709,163"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="698,70,639,110,636,106,695,66"/>
-<area shape="rect" id="Node000004" href="$HybridRoutes_8h.html" title=" " alt="" coords="319,218,570,273"/>
+<area shape="rect" id="Node000004" href="$HybridRoutes_8h.html" title="Declares functions for planning routes with both walking and driving sections." alt="" coords="319,218,570,273"/>
 <area shape="poly" id="edge17_Node000001_Node000004" title=" " alt="" coords="624,44,585,52,547,66,511,85,480,110,463,135,453,163,446,218,441,217,448,162,458,132,476,106,508,80,544,61,583,47,623,38"/>
 <area shape="rect" id="Node000006" href="$Menu_8h.html" title="Provides functions for displaying and handling the menu system." alt="" coords="402,335,621,390"/>
 <area shape="poly" id="edge20_Node000001_Node000006" title=" " alt="" coords="623,51,471,73,303,107,225,129,156,154,102,182,82,197,67,212,22,275,12,295,8,309,10,317,19,321,54,322,190,310,283,311,334,316,389,325,421,333,420,338,388,331,334,321,282,316,190,316,55,327,17,326,6,320,3,309,7,293,18,272,63,209,78,193,99,177,154,149,223,124,302,102,470,68,623,45"/>

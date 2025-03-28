@@ -17,7 +17,7 @@ var searchData=
   ['getqueueindex_14',['getQueueIndex',['../classVertex.html#ac83e9238e2f4c54b46c77a409f44c769',1,'Vertex']]],
   ['getreverse_15',['getReverse',['../classEdge.html#af0a900f3006e47b9f363df7429298eeb',1,'Edge']]],
   ['gettime_16',['getTime',['../classEdge.html#a169c24bc2d1416d1e58e15957c1e7c49',1,'Edge']]],
-  ['getuserchoice_17',['getuserchoice',['../Menu_8cpp.html#acc2e9391793f2e49ab9f768188b95865',1,'getUserChoice(int min, int max):&#160;Menu.cpp'],['../Menu_8h.html#acc2e9391793f2e49ab9f768188b95865',1,'getUserChoice(int min, int max):&#160;Menu.cpp']]],
+  ['getuserchoice_17',['getUserChoice',['../namespaceUtils.html#af1005e6d407b2c160e822519393a0511',1,'Utils']]],
   ['getvalidatedint_18',['getValidatedInt',['../namespaceUtils.html#a44f117620f816f293e13124b22f033e8',1,'Utils']]],
   ['getvertexset_19',['getVertexSet',['../classGraph.html#a41624b03fcb6bd29e4df574a1ec58541',1,'Graph']]],
   ['graph_20',['Graph',['../classGraph.html',1,'']]],

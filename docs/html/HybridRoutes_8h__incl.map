@@ -1,5 +1,5 @@
 <map id="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/route_planning/HybridRoutes.h" name="/home/barroco/Documents/FEUP/Semestre_2/DA/DA2025/src/route_planning/HybridRoutes.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="490,5,741,60"/>
+<area shape="rect" id="Node000001" title="Declares functions for planning routes with both walking and driving sections." alt="" coords="490,5,741,60"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="158,343,220,368"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="490,44,369,63,302,80,235,103,170,132,110,170,57,215,14,271,8,288,12,302,24,314,43,324,93,339,145,347,144,353,92,344,41,329,21,318,8,304,3,288,9,268,53,212,107,165,168,128,233,98,300,75,367,58,490,38"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="926,108,1050,133"/>
@@ -23,7 +23,7 @@
 <area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="367,219,470,261,468,266,365,224"/>
 <area shape="rect" id="Node000009" title=" " alt="" coords="370,269,456,295"/>
 <area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="345,220,391,258,387,262,342,224"/>
-<area shape="rect" id="Node000010" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="162,269,346,295"/>
+<area shape="rect" id="Node000010" href="$MutablePriorityQueue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="162,269,346,295"/>
 <area shape="poly" id="edge10_Node000005_Node000010" title=" " alt="" coords="307,223,275,260,271,257,303,220"/>
 <area shape="poly" id="edge11_Node000010_Node000002" title=" " alt="" coords="246,297,211,334,207,331,242,293"/>
 <area shape="poly" id="edge13_Node000011_Node000004" title=" " alt="" coords="759,219,812,259,809,263,756,224"/>

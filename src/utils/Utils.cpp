@@ -3,6 +3,35 @@
 #include <sstream>
 
 namespace Utils {
+    std::pair<std::string, std::string> chooseDatasetFiles() {
+        std::cout << "Choose the Dataset:" << std::endl;
+        std::cout << "1 - Small (SmallLocations.csv / SmallDistances.csv)" << std::endl;
+        std::cout << "2 - Large (Locations.csv / Distances.csv)" << std::endl;
+
+        int option = Utils::getUserChoice(1, 2);
+
+        if (option == 1)
+            return {"./data/SmallLocations.csv", "./data/SmallDistances.csv"};
+        else
+            return {"./data/Locations.csv", "./data/Distances.csv"};
+    }
+
+    int getUserChoice(int min, int max) {
+        int choice;
+        while (true) {
+            std::cout << "Enter your choice: ";
+            std::cin >> choice;
+            if (std::cin.fail() || choice < min || choice > max) {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Invalid input. Please enter a number between " << min << " and " << max << ".\n";
+            } else {
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                return choice;
+            }
+        }
+    }
+
     int getValidatedInt(const std::string& prompt) {
         int value;
         while (true) {
@@ -156,29 +185,102 @@ namespace Utils {
         return flag;
     }
 
-    void printReport(const std::string& reportType, const Graph<Location>* cityGraph) {
-        std::cout << reportType << " reports: " << std::endl;
+    int countSpecialChars(const std::string& text) {
+        int count = 0;
 
-        if (reportType == "Locations") {
-            // Ensure sufficient width for each column
-            std::cout << std::setw(15) << std::left << "Location ID"
-                       << std::setw(40) << std::left << "Location Name"
-                       << std::setw(20) << std::left << "Code"
-                       << std::setw(15) << std::left << "Parking" << std::endl;
+        for (size_t i = 0; i < text.size(); ) {
+            unsigned char c = static_cast<unsigned char>(text[i]);
 
-            for (Vertex<Location> * location : cityGraph->getVertexSet()) {
-                // Print out each field ensuring proper width for wide characters
-                std::cout << std::setw(15) << std::left << location->getInfo().getId()
-                           << std::setw(40) << std::left << location->getInfo().getName()
-                           << std::setw(20) << std::left << location->getInfo().getCode()
-                           << std::setw(15) << std::left << (location->getInfo().hasParking() ? "Yes" : "No") << std::endl;
+            if ((c & 0x80) == 0) {
+                // ASCII (1 byte)
+                i += 1;
+            } else if ((c & 0xE0) == 0xC0) {
+                // Likely a 2-byte UTF-8 character: é, ç, ã, etc.
+                count++;
+                i += 2;
+            } else if ((c & 0xF0) == 0xE0) {
+                // 3-byte character
+                count++;
+                i += 3;
+            } else if ((c & 0xF8) == 0xF0) {
+                // 4-byte character (emoji, symbols)
+                count++;
+                i += 4;
+            } else {
+                // Fallback
+                i += 1;
             }
         }
-        else {
-            std::cout << "Invalid report type." << std::endl;
-            return;
+
+        return count;
+    }
+
+    void printReport(const Graph<Location> *cityGraph) {
+        std::cout << "Location reports:" << std::endl;
+
+        constexpr int idWidth = 12;
+        constexpr int nameWidth = 35;
+        constexpr int codeWidth = 20;
+        constexpr int parkingWidth = 8;
+
+        std::cout << std::left
+                << std::setw(idWidth) << "Location ID"
+                << std::setw(nameWidth) << "Location Name"
+                << std::setw(codeWidth) << "Code"
+                << std::setw(parkingWidth) << "Parking"
+                << std::endl;
+
+        std::cout << std::string(idWidth + nameWidth + codeWidth + parkingWidth + 1, '-') << std::endl;
+
+        for (Vertex<Location> *location: cityGraph->getVertexSet()) {
+            const auto &loc = location->getInfo();
+            const std::string &name = loc.getName();
+
+            int adjustedNameWidth = nameWidth + countSpecialChars(name);
+            std::cout << std::left
+                    << std::setw(idWidth) << loc.getId()
+                    << std::setw(adjustedNameWidth) << name
+                    << std::setw(codeWidth) << loc.getCode()
+                    << std::setw(parkingWidth) << (loc.hasParking() ? "Yes" : "No")
+                    << std::endl;
+        }
+
+        std::cout << "Road reports:" << std::endl;
+
+        constexpr int fromWidth = 35;
+        constexpr int toWidth = 35;
+        constexpr int walkTimeWidth = 15;
+        constexpr int driveTimeWidth = 15;
+
+        std::cout << std::left
+                << std::setw(fromWidth) << "From"
+                << std::setw(toWidth) << "To"
+                << std::setw(walkTimeWidth) << "Walking Time"
+                << std::setw(driveTimeWidth) << "Driving Time"
+                << std::endl;
+
+        std::cout << std::string(fromWidth + toWidth + walkTimeWidth + driveTimeWidth, '-') << std::endl;
+
+        for (Vertex<Location> *vertex: cityGraph->getVertexSet()) {
+            for (Edge<Location> *edge: vertex->getAdj()) {
+                const std::string fromName = vertex->getInfo().getName();
+                const std::string toName = edge->getDest()->getInfo().getName();
+                const int adjustedFromWidth = fromWidth + countSpecialChars(fromName);
+                const int adjustedToWidth = toWidth + +countSpecialChars(toName);
+                const int drivingTime = static_cast<int>(edge->getTime(false));
+                const std::string drivingTimeString = (drivingTime == -1) ? "X" : std::to_string(drivingTime);
+
+                std::cout << std::left
+                        << std::setw(adjustedFromWidth) << fromName
+                        << std::setw(adjustedToWidth) << toName
+                        << std::setw(walkTimeWidth) << edge->getTime(true)
+                        << std::setw(driveTimeWidth) << drivingTimeString
+                        << std::endl;
+            }
         }
     }
+
+
 
     void printRoute(const std::vector<Vertex<Location>*>& path, double bestDistance) {
         if (path.empty()) {

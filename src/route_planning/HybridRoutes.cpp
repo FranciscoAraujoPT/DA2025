@@ -121,6 +121,7 @@ namespace HybridRoutes {
         bool foundSolution = false;
 
         for (Vertex<Location>* parkingSpot : parkingSpots) {
+
             drivingPath = dijkstra(cityGraph, startPoint, parkingSpot, currentBestTime);
             if (drivingPath.empty() || drivingPath.back() != parkingSpot) {
                 continue;
@@ -132,7 +133,14 @@ namespace HybridRoutes {
                 continue;
             }
             walkingTime = walkingPath.back()->getDist();
-            if (walkingTime <= maxWalkingTime && ((static_cast<long long>(drivingTime) + static_cast<long long>(walkingTime) <  static_cast<long long>(std::get<2>(solution)) +  static_cast<long long>(std::get<3>(solution))) || (static_cast<long long>(drivingTime) + static_cast<long long>(walkingTime) == static_cast<long long>(std::get<2>(solution)) +  static_cast<long long>(std::get<3>(solution)) && walkingTime > std::get<3>(solution)))) {
+
+            long long totalTime = static_cast<long long>(drivingTime) + walkingTime;
+            long long currentBestTotal = static_cast<long long>(std::get<2>(solution)) + std::get<3>(solution);
+            long long currentBestWalking = std::get<3>(solution);
+
+            if (walkingTime <= maxWalkingTime &&
+                (totalTime < currentBestTotal ||
+                 (totalTime == currentBestTotal && walkingTime > currentBestWalking))) {
                 std::get<0>(solution) = drivingPath;
                 std::get<1>(solution) = walkingPath;
                 std::get<2>(solution) = drivingTime;
@@ -140,15 +148,25 @@ namespace HybridRoutes {
                 currentBestTime = drivingTime + walkingTime;
                 foundSolution = true;
             }
+
             else if (!foundSolution) {
-                if (static_cast<long long>(std::get<2>(alternativeSolution)) + static_cast<long long>(std::get<3>(alternativeSolution)) < static_cast<long long>(drivingTime) + static_cast<long long>(walkingTime) || (static_cast<long long>(std::get<2>(alternativeSolution)) + static_cast<long long>(std::get<3>(alternativeSolution)) == static_cast<long long>(drivingTime) + static_cast<long long>(walkingTime) && std::get<3>(alternativeSolution) > walkingTime)) {
+
+                long long altTotalTime = static_cast<long long>(std::get<2>(alternativeSolution)) + std::get<3>(alternativeSolution);
+                long long currentTotalTime = static_cast<long long>(drivingTime) + walkingTime;
+                long long altWalkingTime = std::get<3>(alternativeSolution);
+
+                if (altTotalTime < currentTotalTime || (altTotalTime == currentTotalTime && altWalkingTime > walkingTime)) {
                    continue;
                 }
                 std::get<0>(alternativeSolution) = drivingPath;
                 std::get<1>(alternativeSolution) = walkingPath;
                 std::get<2>(alternativeSolution) = drivingTime;
                 std::get<3>(alternativeSolution) = walkingTime;
-                if (static_cast<long long>(std::get<2>(solution)) + static_cast<long long>(std::get<3>(solution)) > static_cast<long long>(drivingTime) + static_cast<long long>(walkingTime)) {
+
+                long long bestTotalTime = static_cast<long long>(std::get<2>(solution)) + std::get<3>(solution);
+                long long candidateTotalTime = static_cast<long long>(drivingTime) + walkingTime;
+
+                if (bestTotalTime > candidateTotalTime) {
                     std::swap(solution, alternativeSolution);
                 }
             }
@@ -168,6 +186,7 @@ namespace HybridRoutes {
         }
         printResults(currentSolution, solution, alternativeSolution, maxWalkingTime);
     }
+
     void planEnvFriendlyRoute(Graph<Location>* cityGraph) {
         Vertex<Location>* startPoint = nullptr, *endPoint = nullptr;
         if (Utils::chooseStartAndEndingCities(cityGraph, startPoint, endPoint) == 0) {

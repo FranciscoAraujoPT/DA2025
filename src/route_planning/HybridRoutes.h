@@ -1,3 +1,11 @@
+/**
+* @file HybridRoutes.h
+ * @brief Declares functions for planning routes with both walking and driving sections.
+ *
+ * This module supports planning driving routes that include mandatory stop locations ,avoid user-specified nodes or edges
+ * and returns approximate solutions if no valid solution is found
+ */
+
 #ifndef HYBRID_ROUTES_H
 #define HYBRID_ROUTES_H
 

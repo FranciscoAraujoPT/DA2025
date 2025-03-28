@@ -26,8 +26,10 @@ int main()
 {
     setlocale(LC_ALL, "");
 
-    std::string locations_filename = "./data/SmallLocations.csv";
-    std::string distances_filename = "./data/SmallDistances.csv";
+    std::pair<std::string, std::string> filepaths = Utils::chooseDatasetFiles();
+
+    std::string locations_filename = filepaths.first;
+    std::string distances_filename = filepaths.second;
 
     auto *cityGraph = new Graph<Location>();  // Create a new graph for the city
 

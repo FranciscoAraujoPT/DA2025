@@ -29,15 +29,4 @@ void menu(Graph<Location> *cityGraph);
  */
 void printMenuOptions();
 
-/**
- * @brief Gets the user's choice within a specified range.
- *
- * Ensures the user's input falls within the given minimum and maximum bounds.
- *
- * @param min The minimum valid choice.
- * @param max The maximum valid choice.
- * @return The valid user-selected choice.
- */
-int getUserChoice(int min, int max);
-
 #endif // MENU_H

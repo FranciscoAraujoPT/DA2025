@@ -2,7 +2,7 @@
 <area shape="rect" id="Node000001" title="Utility functions for handling user input, interactions with the graph and printing graph information..." alt="" coords="379,5,597,60"/>
 <area shape="rect" id="Node000002" href="$main_8cpp.html" title="Entry point for the Environment&#45;Friendly Route Planning system." alt="" coords="5,343,224,397"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="365,48,213,72,148,89,104,110,61,150,47,170,37,192,32,214,31,239,36,265,45,294,61,319,81,341,77,344,56,322,40,296,30,266,26,239,26,214,32,190,42,167,57,146,101,106,146,84,212,67,365,43"/>
-<area shape="rect" id="Node000003" href="$HybridRoutes_8h.html" title=" " alt="" coords="115,115,365,170"/>
+<area shape="rect" id="Node000003" href="$HybridRoutes_8h.html" title="Declares functions for planning routes with both walking and driving sections." alt="" coords="115,115,365,170"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="416,68,302,118,299,113,414,63"/>
 <area shape="rect" id="Node000005" href="$Menu_8h.html" title="Provides functions for displaying and handling the menu system." alt="" coords="345,233,564,287"/>
 <area shape="poly" id="edge13_Node000001_Node000005" title=" " alt="" coords="453,72,440,90,431,109,425,141,427,174,435,205,445,231,440,233,430,207,422,175,419,141,425,107,435,87,448,69"/>

@@ -25,7 +25,7 @@
 <area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="494,217,686,267,685,272,492,222"/>
 <area shape="rect" id="Node000010" title=" " alt="" coords="331,269,416,295"/>
 <area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="415,223,391,259,386,256,411,220"/>
-<area shape="rect" id="Node000011" href="$MutablePriorityQueue_8h.html" title=" " alt="" coords="491,269,675,295"/>
+<area shape="rect" id="Node000011" href="$MutablePriorityQueue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="491,269,675,295"/>
 <area shape="poly" id="edge13_Node000008_Node000011" title=" " alt="" coords="464,219,548,261,546,265,462,224"/>
 <area shape="poly" id="edge14_Node000011_Node000004" title=" " alt="" coords="563,297,488,338,486,333,561,292"/>
 <area shape="poly" id="edge16_Node000012_Node000003" title=" " alt="" coords="114,224,62,263,59,259,111,219"/>

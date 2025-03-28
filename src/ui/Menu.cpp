@@ -7,11 +7,11 @@ void menu(Graph<Location> *cityGraph)
     while (menuOpen)
     {
         printMenuOptions();
-        switch (int choice = getUserChoice(0,4))
+        switch (int choice = Utils::getUserChoice(0,4))
         {
             case 1:
             {
-                Utils::printReport("Locations", cityGraph);
+                Utils::printReport(cityGraph);
                 break;
             }
 
@@ -45,25 +45,9 @@ void menu(Graph<Location> *cityGraph)
 void printMenuOptions()
 {
     std::cout << "Route Planning Analysis Tool Menu:" << std::endl;
-    std::cout << "1. Print All Locations" << std::endl;
+    std::cout << "1. Print All Locations and Edges" << std::endl;
     std::cout << "2. Independent Route Planning" << std::endl;
     std::cout << "3. Restricted Route Planning" << std::endl;
     std::cout << "4. Environmentally-Friendly Route Planning" << std::endl;
     std::cout << "0. Exit" << std::endl;
-}
-
-int getUserChoice(int min, int max) {
-    int choice;
-    while (true) {
-        std::cout << "Enter your choice: ";
-        std::cin >> choice;
-        if (std::cin.fail() || choice < min || choice > max) {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid input. Please enter a number between " << min << " and " << max << ".\n";
-        } else {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return choice;
-        }
-    }
 }
