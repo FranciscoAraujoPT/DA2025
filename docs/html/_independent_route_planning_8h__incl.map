@@ -1,0 +1,41 @@
+<map id="src/route_planning/IndependentRoutePlanning.h" name="src/route_planning/IndependentRoutePlanning.h">
+<area shape="rect" id="Node000001" title="Declares functions for planning independent driving routes." alt="" coords="471,5,663,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="229,330,287,356"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="471,38,359,58,297,74,233,97,170,125,111,161,59,205,16,258,8,281,10,290,15,298,36,313,66,323,141,335,214,339,213,344,141,341,64,328,33,317,11,302,5,292,3,281,12,255,55,201,108,157,167,121,231,92,295,69,358,52,470,32"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="666,256,738,282"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="642,44,677,64,704,93,719,130,723,171,719,210,713,242,707,241,714,209,717,171,714,132,700,95,674,68,640,49"/>
+<area shape="rect" id="Node000004" href="$_graph_8h.html" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="324,168,448,208"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="483,49,444,68,411,96,396,123,390,153,384,152,391,121,407,92,441,63,481,44"/>
+<area shape="rect" id="Node000009" href="$_location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="764,168,888,208"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="645,44,697,64,748,92,781,121,807,153,803,157,777,125,744,96,695,69,643,49"/>
+<area shape="rect" id="Node000012" href="$_dijkstra_8h.html" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="421,94,567,120"/>
+<area shape="poly" id="edge15_Node000001_Node000012" title=" " alt="" coords="551,48,517,84,514,81,547,45"/>
+<area shape="rect" id="Node000013" href="$_utils_8h.html" title="Utility functions for handling user input, interactions with the graph and printing graph information..." alt="" coords="591,94,690,120"/>
+<area shape="poly" id="edge18_Node000001_Node000013" title=" " alt="" coords="587,45,621,81,617,84,583,48"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="393,209,396,245,392,265,384,283,368,302,347,317,303,335,301,330,344,312,364,298,380,281,387,263,390,245,388,209"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="449,202,652,253,650,258,447,207"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="215,256,271,282"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="352,211,280,251,277,246,349,207"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="445,256,497,282"/>
+<area shape="poly" id="edge7_Node000004_Node000006" title=" " alt="" coords="409,207,449,244,445,247,405,211"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="295,256,370,282"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="375,210,351,245,347,242,371,207"/>
+<area shape="rect" id="Node000008" href="$_mutable_priority_queue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="26,256,191,282"/>
+<area shape="poly" id="edge9_Node000004_Node000008" title=" " alt="" coords="324,210,166,254,165,249,323,204"/>
+<area shape="poly" id="edge10_Node000008_Node000002" title=" " alt="" coords="135,280,220,321,218,325,133,285"/>
+<area shape="poly" id="edge13_Node000009_Node000003" title=" " alt="" coords="797,211,735,250,732,245,794,206"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="887,256,941,282"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="849,207,891,244,887,248,846,211"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="800,256,852,282"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="829,209,829,241,823,241,823,209"/>
+<area shape="poly" id="edge16_Node000012_Node000004" title=" " alt="" coords="479,122,426,161,423,156,476,118"/>
+<area shape="poly" id="edge17_Node000012_Node000009" title=" " alt="" coords="546,118,750,166,749,171,545,123"/>
+<area shape="poly" id="edge20_Node000013_Node000002" title=" " alt="" coords="620,123,591,143,563,169,547,200,541,228,534,256,525,270,512,284,488,301,461,315,405,333,350,342,302,345,302,340,349,337,404,328,459,310,485,296,508,280,521,267,529,254,536,227,542,198,559,166,587,138,617,118"/>
+<area shape="poly" id="edge21_Node000013_Node000003" title=" " alt="" coords="648,119,694,241,689,243,643,121"/>
+<area shape="poly" id="edge24_Node000013_Node000004" title=" " alt="" coords="602,123,463,166,462,161,601,118"/>
+<area shape="poly" id="edge23_Node000013_Node000006" title=" " alt="" coords="599,123,557,141,519,170,494,205,480,243,475,241,490,203,515,166,555,137,597,118"/>
+<area shape="poly" id="edge25_Node000013_Node000009" title=" " alt="" coords="670,118,767,159,765,164,668,123"/>
+<area shape="poly" id="edge19_Node000013_Node000010" title=" " alt="" coords="691,110,810,129,865,145,887,155,901,166,912,183,918,203,920,241,915,241,913,204,908,185,897,169,884,159,864,150,809,135,690,116"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="573,175,639,201"/>
+<area shape="poly" id="edge22_Node000013_Node000014" title=" " alt="" coords="638,121,620,162,615,160,633,119"/>
+</map>

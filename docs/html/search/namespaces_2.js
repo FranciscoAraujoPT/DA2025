@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['restrictedrouteplanning_0',['RestrictedRoutePlanning',['../namespaceRestrictedRoutePlanning.html',1,'']]]
+  ['restrictedrouteplanning_0',['RestrictedRoutePlanning',['../namespace_restricted_route_planning.html',1,'']]]
 ];

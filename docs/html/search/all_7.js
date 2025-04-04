@@ -1,14 +1,14 @@
 var searchData=
 [
-  ['incoming_0',['incoming',['../classVertex.html#a004d1b624d1cd1a7afe49295682e2899',1,'Vertex']]],
-  ['indegree_1',['indegree',['../classVertex.html#af5db7e2f035a38dcc7c6e1b03117b06a',1,'Vertex']]],
-  ['independentrouteplanning_2',['IndependentRoutePlanning',['../namespaceIndependentRoutePlanning.html',1,'']]],
-  ['independentrouteplanning_2ecpp_3',['IndependentRoutePlanning.cpp',['../IndependentRoutePlanning_8cpp.html',1,'']]],
-  ['independentrouteplanning_2eh_4',['IndependentRoutePlanning.h',['../IndependentRoutePlanning_8h.html',1,'']]],
-  ['inf_5',['INF',['../Graph_8h.html#a12c2040f25d8e3a7b9e1c2024c618cb6',1,'Graph.h']]],
-  ['info_6',['info',['../classVertex.html#a415d7811eef6cdd992f0dca1f35a49cd',1,'Vertex']]],
-  ['insert_7',['insert',['../classMutablePriorityQueue.html#a058fc182052af82e10cc3719e448b62d',1,'MutablePriorityQueue']]],
-  ['isavailable_8',['isavailable',['../classEdge.html#aee6aca5d9b86bd12d70c5c9c90379673',1,'Edge::isAvailable()'],['../classLocation.html#a53b3053363dc217bbf420e25eb1bab25',1,'Location::isAvailable()']]],
-  ['isprocessing_9',['isProcessing',['../classVertex.html#aaa41dfa4ce1a19b4e529cc6cdc23b764',1,'Vertex']]],
-  ['isvisited_10',['isVisited',['../classVertex.html#aa2bb17f6ebd98a67f8da1f689b22fadc',1,'Vertex']]]
+  ['checkstartandendingcitiesadjacency_0',['checkStartAndEndingCitiesAdjacency',['../namespace_utils.html#ababc139ebc0a68d8277989b0db7ee865',1,'Utils']]],
+  ['choosedatasetfiles_1',['chooseDatasetFiles',['../namespace_utils.html#acc72f87bb26f393f48c00c4ffddd8e71',1,'Utils']]],
+  ['choosemiddlepoint_2',['chooseMiddlePoint',['../namespace_utils.html#aad2f83627964f6fcee60e3218d9d3b3a',1,'Utils']]],
+  ['choosenodesandsegmentstoavoid_3',['chooseNodesAndSegmentsToAvoid',['../namespace_utils.html#a53b82485560206c272cf36bdf5b624c3',1,'Utils']]],
+  ['choosestartandendingcities_4',['chooseStartAndEndingCities',['../namespace_utils.html#a540c650b92acbdbb2851e7f18923b34a',1,'Utils']]],
+  ['clion_5',['Clion',['../index.html#with-clion',1,'With Clion'],['../index.html#without-clion',1,'Without Clion']]],
+  ['compile_20and_20run_6',['How to Compile and Run',['../index.html#how-to-compile-and-run',1,'']]],
+  ['countspecialchars_7',['countSpecialChars',['../namespace_utils.html#a3466dddf0f6d6b569553073e6896c697',1,'Utils']]],
+  ['csvreader_8',['CSVReader',['../class_c_s_v_reader.html',1,'CSVReader'],['../class_c_s_v_reader.html#a2fc44a147ed9a68ed8904ea5a49c62be',1,'CSVReader::CSVReader()']]],
+  ['csvreader_2ecpp_9',['CSVReader.cpp',['../_c_s_v_reader_8cpp.html',1,'']]],
+  ['csvreader_2eh_10',['CSVReader.h',['../_c_s_v_reader_8h.html',1,'']]]
 ];

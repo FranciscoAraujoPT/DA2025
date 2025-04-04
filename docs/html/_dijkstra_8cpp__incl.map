@@ -1,0 +1,27 @@
+<map id="src/algorithm/Dijkstra.cpp" name="src/algorithm/Dijkstra.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="277,5,447,31"/>
+<area shape="rect" id="Node000002" href="$_dijkstra_8h.html" title="Declares the Dijkstra algorithm function for shortest path computation." alt="" coords="324,79,401,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="365,31,365,63,360,63,360,31"/>
+<area shape="rect" id="Node000003" href="$_graph_8h.html" title="Contains the template definitions for the Graph, Vertex, and Edge classes." alt="" coords="158,153,281,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="342,107,269,147,267,143,339,103"/>
+<area shape="rect" id="Node000010" href="$_location_8h.html" title="Defines the Location class representing a place in the city." alt="" coords="487,153,611,193"/>
+<area shape="poly" id="edge10_Node000002_Node000010" title=" " alt="" coords="392,103,489,144,487,149,390,108"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="471,241,542,267"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="282,189,456,236,455,242,281,194"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="147,315,204,341"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="158,179,120,185,80,196,44,215,15,243,9,258,11,271,22,282,39,292,84,308,132,318,131,323,83,313,36,297,18,286,7,273,3,257,11,240,41,211,78,191,118,179,157,173"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="25,241,81,267"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="179,196,93,237,91,232,177,192"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="105,241,158,267"/>
+<area shape="poly" id="edge6_Node000003_Node000007" title=" " alt="" coords="200,196,158,233,155,229,196,192"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="182,241,257,267"/>
+<area shape="poly" id="edge7_Node000003_Node000008" title=" " alt="" coords="222,194,222,226,217,226,217,194"/>
+<area shape="rect" id="Node000009" href="$_mutable_priority_queue_8h.html" title="A simple implementation of mutable priority queues, required by Dijkstra algorithm." alt="" coords="281,241,446,267"/>
+<area shape="poly" id="edge8_Node000003_Node000009" title=" " alt="" coords="257,192,329,231,327,236,254,196"/>
+<area shape="poly" id="edge9_Node000009_Node000005" title=" " alt="" coords="333,270,220,313,218,308,331,265"/>
+<area shape="poly" id="edge12_Node000010_Node000004" title=" " alt="" coords="541,195,522,229,518,226,536,192"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="566,241,620,267"/>
+<area shape="poly" id="edge11_Node000010_Node000011" title=" " alt="" coords="562,192,581,226,576,229,557,195"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="644,241,696,267"/>
+<area shape="poly" id="edge13_Node000010_Node000012" title=" " alt="" coords="580,191,640,230,638,235,577,196"/>
+</map>

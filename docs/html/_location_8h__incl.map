@@ -1,0 +1,9 @@
+<map id="src/data_structures/Location.h" name="src/data_structures/Location.h">
+<area shape="rect" id="Node000001" title="Defines the Location class representing a place in the city." alt="" coords="52,5,185,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,59,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,48,58,85,55,81,95,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="83,94,154,120"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="121,46,121,78,116,78,116,46"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="178,94,230,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="142,44,182,81,178,85,138,48"/>
+</map>

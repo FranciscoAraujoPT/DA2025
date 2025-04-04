@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7egraph_0',['~Graph',['../classGraph.html#a43eab1460b5c8ceaa526b40e56a0fb0c',1,'Graph']]]
+  ['queueindex_0',['queueIndex',['../class_vertex.html#a721ab622207a73c5fae7b9abad6c07cc',1,'Vertex']]]
 ];

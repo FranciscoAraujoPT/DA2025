@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['menu_2',['menu',['../Menu_8cpp.html#ae5d2843daeb2c2f66cc8f67aff85ab46',1,'menu(Graph&lt; Location &gt; *cityGraph):&#160;Menu.cpp'],['../Menu_8h.html#ae5d2843daeb2c2f66cc8f67aff85ab46',1,'menu(Graph&lt; Location &gt; *cityGraph):&#160;Menu.cpp']]],
-  ['menu_2ecpp_3',['Menu.cpp',['../Menu_8cpp.html',1,'']]],
-  ['menu_2eh_4',['Menu.h',['../Menu_8h.html',1,'']]],
-  ['mutablepriorityqueue_5',['mutablepriorityqueue',['../classMutablePriorityQueue.html',1,'MutablePriorityQueue&lt; T &gt;'],['../classMutablePriorityQueue.html#aba8ebedcbe659f2680bac229cfaca526',1,'MutablePriorityQueue::MutablePriorityQueue()']]],
-  ['mutablepriorityqueue_2eh_6',['MutablePriorityQueue.h',['../MutablePriorityQueue_8h.html',1,'']]],
-  ['mutablepriorityqueue_3c_20vertex_20_3e_7',['MutablePriorityQueue&lt; Vertex &gt;',['../classVertex.html#a6e8dd99e4d0d0f5083b2fb64743a8953',1,'Vertex']]]
+  ['edge_0',['Edge',['../class_edge.html',1,'Edge&lt; T &gt;'],['../class_edge.html#a217515796cb237d6ed5934c27d1315ed',1,'Edge::Edge()']]],
+  ['empty_1',['empty',['../class_mutable_priority_queue.html#a2edbb1f4a6fa3ff735700dfcebebe8d4',1,'MutablePriorityQueue']]],
+  ['environment_20friendly_20route_20planning_2',['Environment-Friendly Route Planning',['../index.html',1,'']]],
+  ['environmentally_20friendly_20route_20planning_3',['Option 4: Environmentally-Friendly Route Planning',['../index.html#option-4-environmentally-friendly-route-planning',1,'']]],
+  ['exit_20the_20program_4',['Option 0: Exit the program',['../index.html#option-0-exit-the-program',1,'']]],
+  ['extractmin_5',['extractMin',['../class_mutable_priority_queue.html#a3880874d7364279ac0d6d31302b28853',1,'MutablePriorityQueue']]]
 ];
