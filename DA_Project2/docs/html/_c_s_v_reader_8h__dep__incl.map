@@ -1,0 +1,7 @@
+<map id="src/data_handling/CSVReader.h" name="src/data_handling/CSVReader.h">
+<area shape="rect" id="Node000001" title="Defines the interface for reading CSV files containing truck and pallet data." alt="" coords="108,5,316,31"/>
+<area shape="rect" id="Node000002" href="$_c_s_v_reader_8cpp.html" title=" " alt="" coords="5,79,227,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,43,134,81,130,76,182,38"/>
+<area shape="rect" id="Node000003" href="$_menu_8cpp.html" title=" " alt="" coords="251,79,365,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="242,38,294,76,290,81,239,43"/>
+</map>

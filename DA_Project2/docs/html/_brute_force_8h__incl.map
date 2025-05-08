@@ -1,0 +1,9 @@
+<map id="src/algorithms/BruteForce.h" name="src/algorithms/BruteForce.h">
+<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using a brute&#45;force approach." alt="" coords="5,5,188,31"/>
+<area shape="rect" id="Node000002" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="35,79,158,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="99,31,99,64,94,64,94,31"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="25,168,82,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,121,70,155,65,152,84,119"/>
+<area shape="rect" id="Node000004" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="106,168,172,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="109,119,128,152,123,155,105,121"/>
+</map>

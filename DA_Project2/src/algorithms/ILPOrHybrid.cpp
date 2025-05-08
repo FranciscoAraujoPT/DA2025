@@ -5,6 +5,8 @@
 #include "ILPOrHybrid.h"
 #include <iostream>
 
-void ILPOrHybrid::solve(const Truck &truck) {
-    std::cout << "[TODO] ILP or Hybrid implementation goes here.\n";
-}
+namespace ILPOrHybrid {
+    void solve(const Truck &truck) {
+        std::cout << "[TODO] ILP or Hybrid implementation goes here.\n";
+    }
+};

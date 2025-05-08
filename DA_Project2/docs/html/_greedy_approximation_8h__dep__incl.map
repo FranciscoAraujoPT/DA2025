@@ -1,0 +1,7 @@
+<map id="src/algorithms/GreedyApproximation.h" name="src/algorithms/GreedyApproximation.h">
+<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using a greedy approximation." alt="" coords="116,5,360,31"/>
+<area shape="rect" id="Node000002" href="$_greedy_approximation_8cpp.html" title="Implements the greedy approximation approach for solving the knapsack problem." alt="" coords="5,79,263,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="210,42,153,81,150,76,207,38"/>
+<area shape="rect" id="Node000003" href="$_menu_8cpp.html" title=" " alt="" coords="286,79,400,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="270,38,327,76,324,81,267,42"/>
+</map>

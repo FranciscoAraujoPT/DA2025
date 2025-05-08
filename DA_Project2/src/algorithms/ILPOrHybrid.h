@@ -7,9 +7,8 @@
 
 #include "../data_structures/Truck.h"
 
-class ILPOrHybrid {
-public:
-    static void solve(const Truck &truck);
+namespace ILPOrHybrid {
+    void solve(const Truck &truck);
 };
 
 #endif // ILP_OR_HYBRID_H

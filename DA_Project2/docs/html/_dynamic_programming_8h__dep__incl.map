@@ -1,0 +1,7 @@
+<map id="src/algorithms/DynamicProgramming.h" name="src/algorithms/DynamicProgramming.h">
+<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using dynamic programming." alt="" coords="118,5,365,31"/>
+<area shape="rect" id="Node000002" href="$_dynamic_programming_8cpp.html" title="Implements the dynamic programming approach for solving the knapsack problem." alt="" coords="5,79,267,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="212,42,155,81,152,76,209,38"/>
+<area shape="rect" id="Node000003" href="$_menu_8cpp.html" title=" " alt="" coords="291,79,405,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="274,38,331,76,328,81,271,42"/>
+</map>
