@@ -1,9 +1,0 @@
-<map id="src/algorithms/GreedyApproximation.h" name="src/algorithms/GreedyApproximation.h">
-<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using a greedy approximation." alt="" coords="5,5,249,31"/>
-<area shape="rect" id="Node000002" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="65,79,189,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,31,130,64,124,64,124,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="56,168,113,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="119,121,101,155,96,152,114,119"/>
-<area shape="rect" id="Node000004" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="137,168,202,193"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="140,119,158,152,153,155,135,121"/>
-</map>

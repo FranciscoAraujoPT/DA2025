@@ -1,9 +1,0 @@
-<map id="src/algorithms/DynamicProgramming.h" name="src/algorithms/DynamicProgramming.h">
-<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using dynamic programming." alt="" coords="5,5,253,31"/>
-<area shape="rect" id="Node000002" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="67,79,191,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,31,132,64,126,64,126,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="58,168,115,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,121,103,155,98,152,116,119"/>
-<area shape="rect" id="Node000004" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="139,168,204,193"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="142,119,160,152,155,155,137,121"/>
-</map>

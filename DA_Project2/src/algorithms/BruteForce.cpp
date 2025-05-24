@@ -49,15 +49,8 @@ namespace BruteForce {
             }
         }
 
-        END_TIMER_AND_REPORT("Brute Force")
-        // Output
-        cout << "Total Profit: " << maxProfit << endl;
-        cout << "Total Weight: " << bestWeight << " / " << capacity << "\n";
-        cout << "Best Subset of Pallets (by ID): ";
-        for (int id : bestSubset) {
-            cout << id << " ";
-        }
-        cout << endl;
+        END_TIMER_AND_REPORT("Brute Force");
+        Utils::printResults(maxProfit, bestWeight, capacity, bestSubset);
     }
 
 }

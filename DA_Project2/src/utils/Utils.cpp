@@ -35,4 +35,21 @@ namespace Utils {
         }
     }
 
+    bool compareByProfitWeightRatio(const Pallet &a, const Pallet &b) {
+        double ratioA = static_cast<double>(a.getProfit()) / a.getWeight();
+        double ratioB = static_cast<double>(b.getProfit()) / b.getWeight();
+        return ratioA > ratioB;
+    }
+
+    void printResults(int totalProfit, int totalWeight, int capacity, std::vector<int>& selectedIDs) {
+        std::cout << "Total Profit: " << totalProfit << "\n";
+        std::cout << "Total Weight: " << totalWeight << " / " << capacity << "\n";
+        std::cout << "Selected Pallets (by ID): ";
+        for (int id : selectedIDs) {
+            std::cout << id << " ";
+        }
+        std::cout << std::endl;
+    }
+
+
 }

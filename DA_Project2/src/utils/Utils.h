@@ -11,6 +11,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <chrono>
 #include "../data_structures/Truck.h"
 
 /**
@@ -59,6 +60,26 @@ namespace Utils {
      * @param truck The `Truck` object whose information is to be printed.
      */
     void printTruckInfo(const Truck &truck);
+
+    /**
+     * @brief Compares two pallets by their profit-to-weight ratio in descending order.
+     *        Useful for greedy or bound-based algorithms where this heuristic improves efficiency.
+     *
+     * @param a First pallet to compare.
+     * @param b Second pallet to compare.
+     * @return true if a has a higher ratio than b, false otherwise.
+     */
+    bool compareByProfitWeightRatio(const Pallet& a, const Pallet& b);
+    /**
+     * @brief This function takes care of outputting the results to the console.
+     *        It displays the total profit, total weight and the pallets chosen by the best solution.
+     *
+     * @param totalProfit The total profit achieved by the algorithm's solution.
+     * @param totalWeight The total weight achieved by the algorithm's solution.
+     * @param capacity The total weight capacity of the truck.
+     * @param selectedIDs A vector containing the ids of the pallets that were chosen by the algorithm.
+     */
+    void printResults(int totalProfit, int totalWeight, int capacity, std::vector<int>& selectedIDs);
 }
 
 #endif // UTILS_H

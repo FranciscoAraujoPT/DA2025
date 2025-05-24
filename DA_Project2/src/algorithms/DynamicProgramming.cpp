@@ -64,16 +64,7 @@ namespace DynamicProgramming {
         }
 
         END_TIMER_AND_REPORT("Dynamic Programming")
-
-        // Output results
-        const auto& bestSelection = selected[bestCap];
-        cout << "Total Profit: " << maxProfit << endl;
-        cout << "Total Weight: " << bestSelection.totalWeight << " / " << capacity << "\n";
-        cout << "Selected Pallets (by ID): ";
-        for (int id : bestSelection.ids) {
-            cout << id << " ";
-        }
-        cout << endl;
+        Utils::printResults(maxProfit, selected[bestCap].totalWeight, capacity, selected[bestCap].ids);
     }
 
 }

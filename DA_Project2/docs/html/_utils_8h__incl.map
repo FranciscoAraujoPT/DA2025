@@ -1,9 +1,0 @@
-<map id="src/utils/Utils.h" name="src/utils/Utils.h">
-<area shape="rect" id="Node000001" title="Defines utility functions used across the project." alt="" coords="22,5,131,31"/>
-<area shape="rect" id="Node000002" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="15,79,138,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,31,79,64,74,64,74,31"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,63,193"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="68,121,50,155,46,152,64,119"/>
-<area shape="rect" id="Node000004" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="87,168,152,193"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="90,119,108,152,103,155,85,121"/>
-</map>

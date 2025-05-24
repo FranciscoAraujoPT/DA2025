@@ -24,11 +24,7 @@ namespace GreedyApproximation {
         int capacity = truck.getCapacity();
 
         // Sort pallets by decreasing profit-to-weight ratio
-        sort(pallets.begin(), pallets.end(), [](const Pallet& a, const Pallet& b) {
-            double ratioA = static_cast<double>(a.getProfit()) / a.getWeight();
-            double ratioB = static_cast<double>(b.getProfit()) / b.getWeight();
-            return ratioA > ratioB;
-        });
+        sort(pallets.begin(), pallets.end(), Utils::compareByProfitWeightRatio);
 
         int totalWeight = 0;
         int totalProfit = 0;
@@ -42,14 +38,8 @@ namespace GreedyApproximation {
             }
         }
 
-        END_TIMER_AND_REPORT("Greedy Approximation")
-        // Output results
-        cout << "Total Profit: " << totalProfit << "\n";
-        cout << "Total Weight: " << totalWeight << " / " << capacity << "\n";
-        cout << "Selected Pallets (by ID): ";
-        for (int id : selectedIDs) {
-            cout << id << " ";
-        }
-        cout << endl;
+        END_TIMER_AND_REPORT("Greedy Approximation");
+        Utils::printResults(totalProfit, totalWeight, capacity, selectedIDs);
+
     }
 }

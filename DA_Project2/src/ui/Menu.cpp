@@ -4,7 +4,7 @@
 #include "../algorithms/BruteForce.h"
 #include "../algorithms/DynamicProgramming.h"
 #include "../algorithms/GreedyApproximation.h"
-#include "../algorithms/ILPOrHybrid.h"
+#include "../algorithms/ILPBranchAndBound.h"
 #include "../utils/Utils.h"
 #include "../data_handling/CSVReader.h"
 
@@ -67,7 +67,7 @@ namespace Menu {
 
                 case 5: {
                     std::cout << "\n[Integer Linear Programming Solution]\n";
-                    ILPOrHybrid::solve(truck);
+                    ILPBranchAndBound::solve(truck);
                     break;
                 }
 
