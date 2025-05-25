@@ -29,7 +29,7 @@ namespace DynamicProgramming {
      * @note The solution utilizes a 1D DP array for efficiency. The maximum capacity is the largest index
      * in the array.
      *
-     * @complexity
+     * **Complexity**
      * - Time Complexity: O(n * W) where `n` is the number of pallets and `W` is the capacity of the truck.
      * - Space Complexity: O(W) where `W` is the capacity of the truck (due to the DP array and selection tracking).
      */

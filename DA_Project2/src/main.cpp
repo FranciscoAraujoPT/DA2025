@@ -1,5 +1,5 @@
 /**
-* @mainpage DA - Delivery Truck Pallet Packing Optimization
+* DA - Delivery Truck Pallet Packing Optimization
  *
  * @section intro_sec Introduction
  * This project solves a delivery truck pallet packing problem using combinatorial optimization algorithms.

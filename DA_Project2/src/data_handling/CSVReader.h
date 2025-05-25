@@ -37,7 +37,7 @@ public:
      * (ID, weight, and profit) from the pallet CSV file. It populates a `Truck` object with this data and returns it.
      * If any error occurs (such as the files not existing or being unable to open), an empty `Truck` object is returned.
      *
-     * @param datasetNumber The ID of the dataset to load.
+     * @param datasetId The ID of the dataset to load.
      * @return A `Truck` object containing the data read from the CSV files.
      *         If an error occurs, an empty truck is returned.
      */

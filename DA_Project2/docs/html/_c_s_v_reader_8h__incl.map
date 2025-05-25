@@ -1,0 +1,12 @@
+<map id="src/data_handling/CSVReader.h" name="src/data_handling/CSVReader.h">
+<area shape="rect" id="Node000001" title="Defines the interface for reading CSV files containing truck and pallet data." alt="" coords="5,5,213,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="18,86,72,112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="101,33,67,76,62,72,97,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="87,168,144,193"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="112,31,117,152,112,152,107,32"/>
+<area shape="rect" id="Node000004" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="146,79,269,120"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,29,173,67,170,71,122,34"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="187,122,143,159,140,155,183,118"/>
+<area shape="rect" id="Node000005" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="175,168,240,193"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="210,120,210,152,205,152,205,120"/>
+</map>

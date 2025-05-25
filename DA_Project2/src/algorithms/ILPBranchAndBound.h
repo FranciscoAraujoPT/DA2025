@@ -27,7 +27,7 @@ namespace ILPBranchAndBound {
      * and updates the best solution found as it traverses the tree. Each node tracks the level of decision,
      * cumulative profit, weight, and selection path.
      *
-     * @complexity
+     * **Complexity**
      * - Time Complexity: O(2^n) in the worst case, where `n` is the number of pallets (full tree traversal).
      *   However, pruning significantly reduces the number of evaluated nodes in practice.
      * - Space Complexity: O(n) for tracking selection paths per node.

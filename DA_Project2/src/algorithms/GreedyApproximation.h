@@ -25,7 +25,7 @@ namespace GreedyApproximation {
      * @details The greedy approach is faster but does not always give the optimal solution.
      * It evaluates pallets based on the ratio of their weight to profit and iteratively selects pallets until the truck is full.
      *
-     * @complexity
+     * **Complexity**
      * - Time Complexity: O(n log n) where `n` is the number of pallets (due to sorting).
      * - Space Complexity: O(n) due to the storage of the sorted pallets.
      */

@@ -26,7 +26,7 @@ namespace BruteForce {
      * @details The brute-force approach generates all subsets of pallets and checks their total weight and profit.
      * It is guaranteed to find the optimal solution but has poor performance with large datasets.
      *
-     * @complexity
+     * **Complexity**
      * - Time Complexity: O(2^n) where `n` is the number of pallets (since all subsets are evaluated).
      * - Space Complexity: O(n) due to the storage required for the pallet selection.
      */

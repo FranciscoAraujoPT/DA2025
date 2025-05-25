@@ -1,0 +1,9 @@
+<map id="src/algorithms/ILPBranchAndBound.h" name="src/algorithms/ILPBranchAndBound.h">
+<area shape="rect" id="Node000001" title="Defines the interface for solving the knapsack problem using Integer Linear Programming with Branch a..." alt="" coords="5,5,174,46"/>
+<area shape="rect" id="Node000002" href="$_truck_8h.html" title="Defines the Truck class that represents a delivery truck." alt="" coords="28,94,151,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,47,92,78,87,78,87,47"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="18,183,76,208"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="81,136,63,170,58,167,77,134"/>
+<area shape="rect" id="Node000004" href="$_pallet_8h.html" title="Defines the Pallet class representing a pallet in the knapsack problem." alt="" coords="100,183,165,208"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="102,134,121,167,116,170,98,136"/>
+</map>
