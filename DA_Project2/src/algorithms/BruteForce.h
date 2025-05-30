@@ -1,11 +1,11 @@
 /**
-* @file ILPBranchAndBound.h
+* @file BruteForce.h
  * @brief Defines the interface for solving the knapsack problem using Integer Linear Programming with Branch and Bound.
  *
  * This file declares the function for solving the knapsack problem using a Branch and Bound approach,
  * leveraging LP relaxation for bounding and exploring decision nodes efficiently to find the optimal set of pallets.
  *
- * @see ILPBranchAndBound.cpp for the implementation.
+ * @see BruteForce.cpp for the implementation.
  */
 
 #ifndef BRUTE_FORCE_H

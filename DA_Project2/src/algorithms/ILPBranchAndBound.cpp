@@ -132,7 +132,7 @@ namespace ILPBranchAndBound {
             // Exclude current pallet
             Node excludeNode = currentNode;
             excludeNode.level = currentNode.level + 1;
-            bestNode.bound = getUpperBound(excludeNode, capacity, pallets);
+            excludeNode.bound = getUpperBound(excludeNode, capacity, pallets);
             if (excludeNode.bound > totalProfit) {
                 queue.push(excludeNode); // Also could lead to a better solution
             }
